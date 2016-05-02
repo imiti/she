@@ -1,0 +1,270 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text ml; charset=utf-8" /><meta id="Key" name="Keywords" content="å¥¢ä¾ˆå“ç®¡ç†åŸ¹è®­,é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«" /><meta id="Des" name="Description" content="å·´é»ä¹å¤§EMBLåŸ¹è®­,å¥¢ä¾ˆå“ç®¡ç†åŸ¹è®­,é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æœ€æ–°æ–°é—»åŠ¨æ€" /><title>
+	å·´é»ä¹å¤§EMBLåŸ¹è®­,å¥¢ä¾ˆå“ç®¡ç†åŸ¹è®­,é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ–°é—»åŠ¨æ€
+</title>
+    <script src="../js/jquery.js" tppabs="http://embl.chinadauphine.cn/js/jquery.js" type="text/javascript"></script>
+    <link href="../css/default.css" tppabs="http://embl.chinadauphine.cn/css/default.css" rel="stylesheet" type="text/css" /><link href="../css/zi.css" tppabs="http://embl.chinadauphine.cn/css/zi.css" rel="stylesheet" type="text/css" /><link href="../css/page.css" tppabs="http://embl.chinadauphine.cn/css/page.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-1.7.1.min.js" tppabs="http://embl.chinadauphine.cn/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("a[name=a_Num]").live("click", function () {
+                $("a[name=a_Num]").removeClass("cur");
+                $(this).addClass("cur");
+                var pageIndex = $(this).attr("lang");
+                doPage(pageIndex);
+            });
+
+            //ç¬¬ä¸€é¡µ
+            $("#a_First").live("click", function () {
+                var pageIndex = "0";
+                setPageCss(pageIndex);
+                doPage(pageIndex);
+            });
+
+            //ä¸Šä¸€é¡µ
+            $("#a_Back").live("click", function () {
+
+                var curIndex = $("a[class=cur]").attr("lang");
+
+                var pageCount = parseInt($("a[name=a_Num]").length) - 1;
+                var backId = (parseInt(curIndex) - 1);
+                // alert(curIndex);
+                if (backId >= 0) {
+                    setPageCss(backId);
+                    doPage(backId);
+                }
+            });
+
+            //ä¸‹ä¸€é¡µ
+            $("#a_Next").live("click", function () {
+                var curIndex = $("a[class=cur]").attr("lang");
+                //alert();
+                var pageCount = parseInt($("a[name=a_Num]").length) - 1;
+                var nextId = (parseInt(curIndex) + 1);
+                if (nextId <= pageCount) {
+                    setPageCss(nextId);
+                    doPage(nextId);
+                }
+            });
+
+            //è®¾ç½®é¡µé¢é€‰ä¸­æ ·å¼
+            function setPageCss(pageIndex) {
+                $("a[name=a_Num]").removeClass("cur");
+                $("a[name=a_Num]").each(function () {
+                    if ($(this).attr("lang") == pageIndex)
+                        $(this).addClass("cur");
+                });
+            }
+
+            //åŠ è½½åˆ†é¡µæ•°æ®
+            function doPage(pageIndex) {
+                $("#stIndex").html(parseInt(pageIndex) + 1);
+                //alert("aaa :" + pageIndex);
+                $.post("http://embl.chinadauphine.cn/ashx/Pagesite.ashx", { "action": "getpage", pageIndex: pageIndex, rd: Math.random(1) }, function (data) {
+                    // alert(data);
+                    $("#ul_List").empty();
+                    $("#ul_List").prepend(data);
+                    // $("#ul_List").html(data.d);
+                });
+                //            $.ajax({
+                //                type: "post",
+                //                url: "default.aspx/GetList",
+                //                data: "{'pageIndex':'" + pageIndex + "'}",
+                //                contentType: "application/json; charset=utf-8",
+                //                dataType: "json",
+                //                success: function (data) {
+                //                    $("#ul_List").html(data.d);
+                //                },
+                //                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //                    alert(XMLHttpRequest.status);
+                //                    alert(XMLHttpRequest.readyState);
+                //                    alert(textStatus);
+                //                }
+                //            });
+            }
+        })
+    </script>
+</head>
+<body>
+    <form name="form1" method="post" action="javascript:if(confirm('http://embl.chinadauphine.cn/news/default.aspx?__VIEWSTATE=/wEPDwULLTEyMDQ2MjY5MjgPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhuWfueiurSzpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6tkAgIPFgIfAAVa5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbln7norq0s6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5pyA5paw5paw6Ze75Yqo5oCBZAIDD2QWCAIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE4MjE0MjUucG5nIiBhbHQ9J+aWsOmXu+S4reW/gycgLz5kAgkPFgIfAQWpBzxkaXYgY2xhc3M9InBpYyBmbCI+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0nL1VwSW1hZ2UvUmVsYXRlLzIwMTQxMTI0MTY0ODIzNS5wbmcnIGFsdD0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyB3aWR0aD0iMzE4IiBoZWlnaHQ9IjE3OCIvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSJmbCB3Mzc1Ij48aDM+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PC9oMz48c3Bhbj4yMDE0LTExLTI0PC9zcGFuPjxwIGNsYXNzPScnPjxhICB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PHAgc3R5bGU9InRleHQtYWxpZzwvcD48YSBjbGFzcz0nbGJhJyB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PGltZyBzcmM9Ii9pbWFnZXMvY29tbW9uL25ldy5wbmciIGFsdD0i54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfIi8+IOivpuaDhTwvYT48L2Rpdj5kAgsPFgIfAQXNFDxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSflt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvicgIGhyZWY9Jy9OZXdzL2VtYmxnay5odG0nIGNsYXNzPSJmbCBmczE0Ij7lt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvjwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE1LTA0LTIyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAlOS4iua1t+S6pOWkp0VNQkzvvIjpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vvvInpobnnm64yMDE15bm06aaW5qyh5byA6K++JyBocmVmPScvTmV3cy9lbWJsZ2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAiycgIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJyBjbGFzcz0iZmwgZnMxNCI+5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAizwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE0LTEyLTEyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAouWkp+W4iOiusuWggiDvvJrjgIrlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLjgIsnIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0nRU1CTCDigKIg5YWs5byA6K++77ya4oCc5ZCO546w5Luj5oCn77ya5L2O5oiQ5pys5LiO5aWi5L6I5ZOB5biC5Zy65YiG5Ymy4oCdJyAgaHJlZj0nL05ld3MvZW1ibGdray5odG0nIGNsYXNzPSJmbCBmczE0Ij5FTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ08L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yODwvZW0+IDxhIHRpdGxlPSdFTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ0nIGhyZWY9Jy9OZXdzL2VtYmxna2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyAgaHJlZj0nL05ld3MvYnlkYi5odG0nIGNsYXNzPSJmbCBmczE0Ij7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yNDwvZW0+IDxhIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSnRU1CTOehleWjq+WtpuS9jeazleaWuemhueebruivtOaYjuS8micgIGhyZWY9Jy9OZXdzL3htc21oLmh0bScgY2xhc3M9ImZsIGZzMTQiPuW3tOm7juS5neWkp0VNQkznoZXlo6vlrabkvY3ms5Xmlrnpobnnm67or7TmmI7kvJo8L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yMTwvZW0+IDxhIHRpdGxlPSflt7Tpu47kuZ3lpKdFTUJM56GV5aOr5a2m5L2N5rOV5pa56aG555uu6K+05piO5LyaJyBocmVmPScvTmV3cy94bXNtaC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPjxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSfkuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVJyAgaHJlZj0nL05ld3MvZHNqdC5odG0nIGNsYXNzPSJmbCBmczE0Ij7kuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVPC9hPjxzcGFuIGNsYXNzPSJmciI+PGVtPjIwMTQtMTEtMTM8L2VtPiA8YSB0aXRsZT0n5LiK5rW35Lqk5aSnLSDlt7Tpu47kuZ3lpKcgIOWkp+W4iOiusuWggu+8muWlouS+iOWTgeeJjOWcqOS4reWbveS4u+mimOiuuuWdm+WNjuS4veiQveW5lScgaHJlZj0nL05ld3MvZHNqdC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPmQCDQ8WAh8BBYoEPGEgaWQ9J2FfRmlyc3QnIGxhbmc9JzAnIGhyZWY9JyMnPummlumhtTwvYT48YSAgaWQ9J2FfQmFjaycgaHJlZj0nIyc+5LiK5LiA6aG1PC9hPjxhIGxhbmc9JzAnIGNsYXNzPSdjdXInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xPC9hPjxhIGxhbmc9JzEnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4yPC9hPjxhIGxhbmc9JzInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4zPC9hPjxhIGxhbmc9JzMnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz40PC9hPjxhIGxhbmc9JzQnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz41PC9hPjxhIGxhbmc9JzUnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz42PC9hPjxhIGxhbmc9JzYnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz43PC9hPjxhIGxhbmc9JzcnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz44PC9hPjxhIGxhbmc9JzgnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz45PC9hPjxhIGxhbmc9JzknIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xMDwvYT48YSBpZD0nYV9OZXh0JyBocmVmPScjJz7kuIvkuIDpobU8L2E+ZGQpEjDPjsotUhrhv5LSl0hdZW9w2RJLuGJcKcYbLw4USA==&__VIEWSTATEGENERATOR=D32BB407  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ·şÎñÆ÷±¨¸æ¸ÃÎÄ¼şÎ´ÕÒµ½¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://embl.chinadauphine.cn/news/default.aspx?__VIEWSTATE=/wEPDwULLTEyMDQ2MjY5MjgPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhuWfueiurSzpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6tkAgIPFgIfAAVa5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbln7norq0s6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5pyA5paw5paw6Ze75Yqo5oCBZAIDD2QWCAIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE4MjE0MjUucG5nIiBhbHQ9J+aWsOmXu+S4reW/gycgLz5kAgkPFgIfAQWpBzxkaXYgY2xhc3M9InBpYyBmbCI+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0nL1VwSW1hZ2UvUmVsYXRlLzIwMTQxMTI0MTY0ODIzNS5wbmcnIGFsdD0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyB3aWR0aD0iMzE4IiBoZWlnaHQ9IjE3OCIvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSJmbCB3Mzc1Ij48aDM+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PC9oMz48c3Bhbj4yMDE0LTExLTI0PC9zcGFuPjxwIGNsYXNzPScnPjxhICB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PHAgc3R5bGU9InRleHQtYWxpZzwvcD48YSBjbGFzcz0nbGJhJyB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PGltZyBzcmM9Ii9pbWFnZXMvY29tbW9uL25ldy5wbmciIGFsdD0i54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfIi8+IOivpuaDhTwvYT48L2Rpdj5kAgsPFgIfAQXNFDxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSflt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvicgIGhyZWY9Jy9OZXdzL2VtYmxnay5odG0nIGNsYXNzPSJmbCBmczE0Ij7lt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvjwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE1LTA0LTIyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAlOS4iua1t+S6pOWkp0VNQkzvvIjpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vvvInpobnnm64yMDE15bm06aaW5qyh5byA6K++JyBocmVmPScvTmV3cy9lbWJsZ2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAiycgIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJyBjbGFzcz0iZmwgZnMxNCI+5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAizwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE0LTEyLTEyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAouWkp+W4iOiusuWggiDvvJrjgIrlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLjgIsnIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0nRU1CTCDigKIg5YWs5byA6K++77ya4oCc5ZCO546w5Luj5oCn77ya5L2O5oiQ5pys5LiO5aWi5L6I5ZOB5biC5Zy65YiG5Ymy4oCdJyAgaHJlZj0nL05ld3MvZW1ibGdray5odG0nIGNsYXNzPSJmbCBmczE0Ij5FTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ08L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yODwvZW0+IDxhIHRpdGxlPSdFTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ0nIGhyZWY9Jy9OZXdzL2VtYmxna2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyAgaHJlZj0nL05ld3MvYnlkYi5odG0nIGNsYXNzPSJmbCBmczE0Ij7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yNDwvZW0+IDxhIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSnRU1CTOehleWjq+WtpuS9jeazleaWuemhueebruivtOaYjuS8micgIGhyZWY9Jy9OZXdzL3htc21oLmh0bScgY2xhc3M9ImZsIGZzMTQiPuW3tOm7juS5neWkp0VNQkznoZXlo6vlrabkvY3ms5Xmlrnpobnnm67or7TmmI7kvJo8L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yMTwvZW0+IDxhIHRpdGxlPSflt7Tpu47kuZ3lpKdFTUJM56GV5aOr5a2m5L2N5rOV5pa56aG555uu6K+05piO5LyaJyBocmVmPScvTmV3cy94bXNtaC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPjxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSfkuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVJyAgaHJlZj0nL05ld3MvZHNqdC5odG0nIGNsYXNzPSJmbCBmczE0Ij7kuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVPC9hPjxzcGFuIGNsYXNzPSJmciI+PGVtPjIwMTQtMTEtMTM8L2VtPiA8YSB0aXRsZT0n5LiK5rW35Lqk5aSnLSDlt7Tpu47kuZ3lpKcgIOWkp+W4iOiusuWggu+8muWlouS+iOWTgeeJjOWcqOS4reWbveS4u+mimOiuuuWdm+WNjuS4veiQveW5lScgaHJlZj0nL05ld3MvZHNqdC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPmQCDQ8WAh8BBYoEPGEgaWQ9J2FfRmlyc3QnIGxhbmc9JzAnIGhyZWY9JyMnPummlumhtTwvYT48YSAgaWQ9J2FfQmFjaycgaHJlZj0nIyc+5LiK5LiA6aG1PC9hPjxhIGxhbmc9JzAnIGNsYXNzPSdjdXInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xPC9hPjxhIGxhbmc9JzEnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4yPC9hPjxhIGxhbmc9JzInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4zPC9hPjxhIGxhbmc9JzMnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz40PC9hPjxhIGxhbmc9JzQnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz41PC9hPjxhIGxhbmc9JzUnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz42PC9hPjxhIGxhbmc9JzYnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz43PC9hPjxhIGxhbmc9JzcnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz44PC9hPjxhIGxhbmc9JzgnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz45PC9hPjxhIGxhbmc9JzknIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xMDwvYT48YSBpZD0nYV9OZXh0JyBocmVmPScjJz7kuIvkuIDpobU8L2E+ZGQpEjDPjsotUhrhv5LSl0hdZW9w2RJLuGJcKcYbLw4USA==&__VIEWSTATEGENERATOR=D32BB407'" tppabs="http://embl.chinadauphine.cn/news/default.aspx?__VIEWSTATE=/wEPDwULLTEyMDQ2MjY5MjgPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhuWfueiurSzpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6tkAgIPFgIfAAVa5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbln7norq0s6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5pyA5paw5paw6Ze75Yqo5oCBZAIDD2QWCAIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE4MjE0MjUucG5nIiBhbHQ9J+aWsOmXu+S4reW/gycgLz5kAgkPFgIfAQWpBzxkaXYgY2xhc3M9InBpYyBmbCI+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0nL1VwSW1hZ2UvUmVsYXRlLzIwMTQxMTI0MTY0ODIzNS5wbmcnIGFsdD0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyB3aWR0aD0iMzE4IiBoZWlnaHQ9IjE3OCIvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSJmbCB3Mzc1Ij48aDM+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PC9oMz48c3Bhbj4yMDE0LTExLTI0PC9zcGFuPjxwIGNsYXNzPScnPjxhICB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PHAgc3R5bGU9InRleHQtYWxpZzwvcD48YSBjbGFzcz0nbGJhJyB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PGltZyBzcmM9Ii9pbWFnZXMvY29tbW9uL25ldy5wbmciIGFsdD0i54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfIi8+IOivpuaDhTwvYT48L2Rpdj5kAgsPFgIfAQXNFDxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSflt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvicgIGhyZWY9Jy9OZXdzL2VtYmxnay5odG0nIGNsYXNzPSJmbCBmczE0Ij7lt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvjwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE1LTA0LTIyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAlOS4iua1t+S6pOWkp0VNQkzvvIjpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vvvInpobnnm64yMDE15bm06aaW5qyh5byA6K++JyBocmVmPScvTmV3cy9lbWJsZ2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAiycgIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJyBjbGFzcz0iZmwgZnMxNCI+5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAizwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE0LTEyLTEyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAouWkp+W4iOiusuWggiDvvJrjgIrlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLjgIsnIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0nRU1CTCDigKIg5YWs5byA6K++77ya4oCc5ZCO546w5Luj5oCn77ya5L2O5oiQ5pys5LiO5aWi5L6I5ZOB5biC5Zy65YiG5Ymy4oCdJyAgaHJlZj0nL05ld3MvZW1ibGdray5odG0nIGNsYXNzPSJmbCBmczE0Ij5FTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ08L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yODwvZW0+IDxhIHRpdGxlPSdFTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ0nIGhyZWY9Jy9OZXdzL2VtYmxna2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyAgaHJlZj0nL05ld3MvYnlkYi5odG0nIGNsYXNzPSJmbCBmczE0Ij7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yNDwvZW0+IDxhIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSnRU1CTOehleWjq+WtpuS9jeazleaWuemhueebruivtOaYjuS8micgIGhyZWY9Jy9OZXdzL3htc21oLmh0bScgY2xhc3M9ImZsIGZzMTQiPuW3tOm7juS5neWkp0VNQkznoZXlo6vlrabkvY3ms5Xmlrnpobnnm67or7TmmI7kvJo8L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yMTwvZW0+IDxhIHRpdGxlPSflt7Tpu47kuZ3lpKdFTUJM56GV5aOr5a2m5L2N5rOV5pa56aG555uu6K+05piO5LyaJyBocmVmPScvTmV3cy94bXNtaC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPjxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSfkuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVJyAgaHJlZj0nL05ld3MvZHNqdC5odG0nIGNsYXNzPSJmbCBmczE0Ij7kuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVPC9hPjxzcGFuIGNsYXNzPSJmciI+PGVtPjIwMTQtMTEtMTM8L2VtPiA8YSB0aXRsZT0n5LiK5rW35Lqk5aSnLSDlt7Tpu47kuZ3lpKcgIOWkp+W4iOiusuWggu+8muWlouS+iOWTgeeJjOWcqOS4reWbveS4u+mimOiuuuWdm+WNjuS4veiQveW5lScgaHJlZj0nL05ld3MvZHNqdC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPmQCDQ8WAh8BBYoEPGEgaWQ9J2FfRmlyc3QnIGxhbmc9JzAnIGhyZWY9JyMnPummlumhtTwvYT48YSAgaWQ9J2FfQmFjaycgaHJlZj0nIyc+5LiK5LiA6aG1PC9hPjxhIGxhbmc9JzAnIGNsYXNzPSdjdXInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xPC9hPjxhIGxhbmc9JzEnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4yPC9hPjxhIGxhbmc9JzInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4zPC9hPjxhIGxhbmc9JzMnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz40PC9hPjxhIGxhbmc9JzQnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz41PC9hPjxhIGxhbmc9JzUnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz42PC9hPjxhIGxhbmc9JzYnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz43PC9hPjxhIGxhbmc9JzcnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz44PC9hPjxhIGxhbmc9JzgnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz45PC9hPjxhIGxhbmc9JzknIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xMDwvYT48YSBpZD0nYV9OZXh0JyBocmVmPScjJz7kuIvkuIDpobU8L2E+ZGQpEjDPjsotUhrhv5LSl0hdZW9w2RJLuGJcKcYbLw4USA==&__VIEWSTATEGENERATOR=D32BB407" id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMDQ2MjY5MjgPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhuWfueiurSzpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6tkAgIPFgIfAAVa5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbln7norq0s6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5pyA5paw5paw6Ze75Yqo5oCBZAIDD2QWCAIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE4MjE0MjUucG5nIiBhbHQ9J+aWsOmXu+S4reW/gycgLz5kAgkPFgIfAQWpBzxkaXYgY2xhc3M9InBpYyBmbCI+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0nL1VwSW1hZ2UvUmVsYXRlLzIwMTQxMTI0MTY0ODIzNS5wbmcnIGFsdD0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyB3aWR0aD0iMzE4IiBoZWlnaHQ9IjE3OCIvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSJmbCB3Mzc1Ij48aDM+PGEgIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PC9oMz48c3Bhbj4yMDE0LTExLTI0PC9zcGFuPjxwIGNsYXNzPScnPjxhICB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PHAgc3R5bGU9InRleHQtYWxpZzwvcD48YSBjbGFzcz0nbGJhJyB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyBocmVmPScvTmV3cy9ieWRiLmh0bSc+PGltZyBzcmM9Ii9pbWFnZXMvY29tbW9uL25ldy5wbmciIGFsdD0i54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfIi8+IOivpuaDhTwvYT48L2Rpdj5kAgsPFgIfAQXNFDxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSflt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvicgIGhyZWY9Jy9OZXdzL2VtYmxnay5odG0nIGNsYXNzPSJmbCBmczE0Ij7lt7Tpu47kuZ3lpKfigJTkuIrmtbfkuqTlpKdFTUJM77yI6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr77yJ6aG555uuMjAxNeW5tOmmluasoeW8gOivvjwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE1LTA0LTIyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAlOS4iua1t+S6pOWkp0VNQkzvvIjpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vvvInpobnnm64yMDE15bm06aaW5qyh5byA6K++JyBocmVmPScvTmV3cy9lbWJsZ2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAiycgIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJyBjbGFzcz0iZmwgZnMxNCI+5be06buO5Lmd5aSn4oCi5aSn5biI6K6y5aCCIO+8muOAiuWQjueOsOS7o+aAp++8muS9juaIkOacrOS4juWlouS+iOWTgeW4guWcuuWIhuWJsuOAizwvYT48c3BhbiBjbGFzcz0iZnIiPjxlbT4yMDE0LTEyLTEyPC9lbT4gPGEgdGl0bGU9J+W3tOm7juS5neWkp+KAouWkp+W4iOiusuWggiDvvJrjgIrlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLjgIsnIGhyZWY9Jy9OZXdzL2h4ZHguaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0nRU1CTCDigKIg5YWs5byA6K++77ya4oCc5ZCO546w5Luj5oCn77ya5L2O5oiQ5pys5LiO5aWi5L6I5ZOB5biC5Zy65YiG5Ymy4oCdJyAgaHJlZj0nL05ld3MvZW1ibGdray5odG0nIGNsYXNzPSJmbCBmczE0Ij5FTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ08L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yODwvZW0+IDxhIHRpdGxlPSdFTUJMIOKAoiDlhazlvIDor77vvJrigJzlkI7njrDku6PmgKfvvJrkvY7miJDmnKzkuI7lpaLkvojlk4HluILlnLrliIblibLigJ0nIGhyZWY9Jy9OZXdzL2VtYmxna2suaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n54Ot54OI56Wd6LS65be06buO5Lmd5aSn6auY57qn5aWi5L6I5ZOB566h55CG56GV5aOr5q+V5Lia562U6L6p5ZyG5ruh5oiQ5YqfJyAgaHJlZj0nL05ld3MvYnlkYi5odG0nIGNsYXNzPSJmbCBmczE0Ij7ng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip88L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yNDwvZW0+IDxhIHRpdGxlPSfng63ng4jnpZ3otLrlt7Tpu47kuZ3lpKfpq5jnuqflpaLkvojlk4HnrqHnkIbnoZXlo6vmr5XkuJrnrZTovqnlnIbmu6HmiJDlip8nIGhyZWY9Jy9OZXdzL2J5ZGIuaHRtJz48aW1nIHNyYz0iL2ltYWdlcy9jb21tb24vbmV3MS5wbmciIC8+IOivpuaDhTwvYT48L3NwYW4+PC9saT48bGkgY2xhc3M9ImNsZWFyZml4Ij48YSB0aXRsZT0n5be06buO5Lmd5aSnRU1CTOehleWjq+WtpuS9jeazleaWuemhueebruivtOaYjuS8micgIGhyZWY9Jy9OZXdzL3htc21oLmh0bScgY2xhc3M9ImZsIGZzMTQiPuW3tOm7juS5neWkp0VNQkznoZXlo6vlrabkvY3ms5Xmlrnpobnnm67or7TmmI7kvJo8L2E+PHNwYW4gY2xhc3M9ImZyIj48ZW0+MjAxNC0xMS0yMTwvZW0+IDxhIHRpdGxlPSflt7Tpu47kuZ3lpKdFTUJM56GV5aOr5a2m5L2N5rOV5pa56aG555uu6K+05piO5LyaJyBocmVmPScvTmV3cy94bXNtaC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPjxsaSBjbGFzcz0iY2xlYXJmaXgiPjxhIHRpdGxlPSfkuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVJyAgaHJlZj0nL05ld3MvZHNqdC5odG0nIGNsYXNzPSJmbCBmczE0Ij7kuIrmtbfkuqTlpKctIOW3tOm7juS5neWkpyAg5aSn5biI6K6y5aCC77ya5aWi5L6I5ZOB54mM5Zyo5Lit5Zu95Li76aKY6K665Z2b5Y2O5Li96JC95bmVPC9hPjxzcGFuIGNsYXNzPSJmciI+PGVtPjIwMTQtMTEtMTM8L2VtPiA8YSB0aXRsZT0n5LiK5rW35Lqk5aSnLSDlt7Tpu47kuZ3lpKcgIOWkp+W4iOiusuWggu+8muWlouS+iOWTgeeJjOWcqOS4reWbveS4u+mimOiuuuWdm+WNjuS4veiQveW5lScgaHJlZj0nL05ld3MvZHNqdC5odG0nPjxpbWcgc3JjPSIvaW1hZ2VzL2NvbW1vbi9uZXcxLnBuZyIgLz4g6K+m5oOFPC9hPjwvc3Bhbj48L2xpPmQCDQ8WAh8BBYoEPGEgaWQ9J2FfRmlyc3QnIGxhbmc9JzAnIGhyZWY9JyMnPummlumhtTwvYT48YSAgaWQ9J2FfQmFjaycgaHJlZj0nIyc+5LiK5LiA6aG1PC9hPjxhIGxhbmc9JzAnIGNsYXNzPSdjdXInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xPC9hPjxhIGxhbmc9JzEnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4yPC9hPjxhIGxhbmc9JzInIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4zPC9hPjxhIGxhbmc9JzMnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz40PC9hPjxhIGxhbmc9JzQnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz41PC9hPjxhIGxhbmc9JzUnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz42PC9hPjxhIGxhbmc9JzYnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz43PC9hPjxhIGxhbmc9JzcnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz44PC9hPjxhIGxhbmc9JzgnIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz45PC9hPjxhIGxhbmc9JzknIGhyZWY9JyMnIG5hbWU9J2FfTnVtJz4xMDwvYT48YSBpZD0nYV9OZXh0JyBocmVmPScjJz7kuIvkuIDpobU8L2E+ZGQpEjDPjsotUhrhv5LSl0hdZW9w2RJLuGJcKcYbLw4USA==" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="D32BB407" />
+</div>
+    
+<script type="text/javascript">
+    $(function () {
+        $(".HeaderNav ul li").each(function (y) {
+            $(this).hover(function () {
+                $(".HeaderNav ul li").find("a").removeClass("cur");
+                $(".HeaderNav ul li").find("a").eq(y).addClass("cur");
+                $(".SubNav").hide();
+                $(".SubNav").eq(y).show();
+            }, function () {
+                $(".HeaderNav ul li").find("a").removeClass("cur");
+                //$(".HeaderNav ul li").find("a").eq(y).addClass("cur");
+                $(".SubNav").hide();
+            })
+        })
+    });
+    $(document).ready(function () {
+      
+        var url = window.location.href;
+        //alert(url);
+        if (url.indexOf("BaLi") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#jd").find("a").addClass("cur");
+        }
+        if (url.indexOf("project") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#xm").find("a").addClass("cur");
+        }
+        if (url.indexOf("admissions") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#admissions").find("a").addClass("cur");
+        }
+        if (url.indexOf("living") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#living").find("a").addClass("cur");
+        }
+        if (url.indexOf("partner") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#partner").find("a").addClass("cur");
+        }
+        if (url.indexOf("news") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#news").find("a").addClass("cur");
+        }
+        if (url.indexOf("/") < 0) {
+            $("#sy").find("a").addClass("cur");
+        }
+        
+    });
+
+//    $(function () {
+//        $("#jd").click(function () {
+//            alert("1");
+//        });
+//    })
+
+</script>
+<div class="HeaderNav">
+    <div class="HeadCon">
+		<h1><a href="../index.htm" tppabs="http://embl.chinadauphine.cn/"><img src="../images/Logo.png" tppabs="http://embl.chinadauphine.cn/images/Logo.png" alt="" /></a></h1>
+		<ul>
+			<li id="sy"><a class="Title cur" href="../index.htm" tppabs="http://embl.chinadauphine.cn/">é¦–é¡µ</a>
+				<p class="SubNav"></p>
+			</li>
+			<li id="jd"><a class="Title" href="../BaLi/default.htm" tppabs="http://embl.chinadauphine.cn/BaLi/default.htm">å·´é»ä¹å¤§</a>
+				<p class="SubNav">
+					<span><a href="../BaLi/default.htm" tppabs="http://embl.chinadauphine.cn/BaLi/default.htm">æ ¡é•¿è‡´è¾</a></span>
+					<span><a href="../BaLi/introduction.htm" tppabs="http://embl.chinadauphine.cn/BaLi/introduction.htm">å­¦æ ¡ç®€ä»‹</a></span>
+					<span><a href="../BaLi/certification.htm" tppabs="http://embl.chinadauphine.cn/BaLi/certification.htm">å›½é™…è®¤è¯</a></span>
+					<span><a href="../BaLi/research.htm" tppabs="http://embl.chinadauphine.cn/BaLi/research.htm">ç®¡ç†ç ”ç©¶</a></span>
+					<span><a href="../BaLi/contcat.htm" tppabs="http://embl.chinadauphine.cn/BaLi/contcat.htm">è”ç³»æˆ‘ä»¬</a></span>
+				</p>
+			</li>
+			<li id="xm"><a class="Title" href="../project/default.htm" tppabs="http://embl.chinadauphine.cn/project/default.htm">é¡¹ç›®ä»‹ç»</a>
+				<p class="SubNav">
+					<span><a href="../project/default.htm" tppabs="http://embl.chinadauphine.cn/project/default.htm">é¡¹ç›®ä»‹ç»</a></span>
+					<span><a href="../project/team.htm" tppabs="http://embl.chinadauphine.cn/project/team.htm">å¸ˆèµ„å›¢é˜Ÿ</a></span>
+				</p>
+			</li>
+			<li id="admissions"><a class="Title" href="../admissions/process.htm" tppabs="http://embl.chinadauphine.cn/admissions/process.htm">æ‹›ç”Ÿç”³è¯·</a>
+				<p class="SubNav">
+					<span><a href="../admissions/process.htm" tppabs="http://embl.chinadauphine.cn/admissions/process.htm">ç”³è¯·æµç¨‹</a></span>
+					<span><a href="../admissions/default.htm" tppabs="http://embl.chinadauphine.cn/admissions/default.htm">å¸¸è§é—®é¢˜</a></span>
+					<span><a href="../admissions/baoming.htm" tppabs="http://embl.chinadauphine.cn/admissions/baoming.htm">åœ¨çº¿æŠ¥å</a></span>
+				</p>
+			</li>
+			<li id="living"><a class="Title" href="../living/study.htm" tppabs="http://embl.chinadauphine.cn/living/study.htm">æ ¡å‹ç”Ÿæ´»</a>
+				<p class="SubNav">
+					<span><a href="../living/study.htm" tppabs="http://embl.chinadauphine.cn/living/study.htm">æ ¡å‹ç½‘ç»œ</a></span>
+					<span><a href="../living/default.htm" tppabs="http://embl.chinadauphine.cn/living/default.htm">å­¦ä¹ ä½“éªŒ</a></span>
+					<span><a href="../living/youxue.htm" tppabs="http://embl.chinadauphine.cn/living/youxue.htm">æµ·å¤–æ¸¸å­¦</a></span>
+				</p>
+			</li>
+			<li id="partner">
+				<a class="Title" href="../partner/default.htm" tppabs="http://embl.chinadauphine.cn/partner/default.htm">åˆä½œä¼™ä¼´</a>
+				<p class="SubNav">
+					<span><a href="../partner/default.htm" tppabs="http://embl.chinadauphine.cn/partner/default.htm">åˆä½œä¼™ä¼´</a></span>
+					<span><a href="../partner/support.htm" tppabs="http://embl.chinadauphine.cn/partner/support.htm">å“ç‰Œæ”¯æŒ</a></span>
+				</p>
+			</li>
+			<li id="news"><a class="Title" href="default.htm" tppabs="http://embl.chinadauphine.cn/news/default.htm">æ–°é—»ä¸­å¿ƒ</a>
+				<p class="SubNav">
+					<span><a href="default.htm" tppabs="http://embl.chinadauphine.cn/news/default.htm">æ–°é—»åŠ¨æ€</a></span>
+					<span><a href="activity.htm" tppabs="http://embl.chinadauphine.cn/news/activity.htm">è¿‘æœŸæ´»åŠ¨</a></span>
+				</p>
+			</li>
+		</ul>
+		<img src="../images/HotLine.png" tppabs="http://embl.chinadauphine.cn/images/HotLine.png" alt="" class="TellImg" />
+    </div>
+</div>
+    <div id="blbanner" class="SubBanner"><img src="../UpImage/Relate/20140527141821425.png" tppabs="http://embl.chinadauphine.cn/UpImage/Relate/20140527141821425.png" alt='æ–°é—»ä¸­å¿ƒ' /></div>
+    <div class="SubMain clearfix">
+        <div class="AsideLeft">
+            
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+        if (url.indexOf("default") > 0) {
+            $("#default").addClass("cur");
+        }
+        if (url.indexOf("activity") > 0) {
+            $("#activity").addClass("cur");
+        }
+    });
+</script>
+<div class="AsideMenu">
+    <strong class="Tit">æ–°é—»ä¸­å¿ƒ</strong>
+    <ul>
+        <li id="default"><a href="default.aspx.htm" tppabs="http://embl.chinadauphine.cn/news/default.aspx">æ–°é—»åŠ¨æ€</a></li>
+        <li id="activity"><a href="activity.aspx.htm" tppabs="http://embl.chinadauphine.cn/news/activity.aspx">è¿‘æœŸæ´»åŠ¨</a></li>
+    </ul>
+</div>
+            
+<a href="" class="AsideAd1"><img src="../images/AdImg1.jpg" tppabs="http://embl.chinadauphine.cn/images/AdImg1.jpg" alt="2014å·´é»ä¹å¤§EMBLé«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ç«çƒ­æ‹›ç”Ÿä¸­ç‚¹å‡»å’¨è¯¢æ‹›ç”Ÿçƒ­çº¿400-0730-027" /></a>
+        </div>
+        <div class="RightCont">
+            <p class="Position">
+                <a href="../index.htm" tppabs="http://embl.chinadauphine.cn/">é¦–é¡µ</a> &gt; <a href="index.htm" tppabs="http://embl.chinadauphine.cn/news/">æ–°é—»ä¸­å¿ƒ</a> &gt; <span>æ–°é—»åŠ¨æ€</span>
+            </p>
+            <div class="news">
+                <div id="top" class="scp clearfix"><div class="pic fl"><a  title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm"><img src="../UpImage/Relate/201411241648235.png" tppabs="http://embl.chinadauphine.cn/UpImage/Relate/201411241648235.png" alt='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' width="318" height="178"/></a></div><div class="fl w375"><h3><a  title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm">çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ</a></h3><span>2014-11-24</span><p class=''><a  title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm"><p style="text-alig</p><a class='lba' title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm"><img src="../images/common/new.png" tppabs="http://embl.chinadauphine.cn/images/common/new.png" alt="çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ"/> è¯¦æƒ…</a></div></div>
+                <ul id="ul_List" class="newsul"><li class="clearfix"><a title='å·´é»ä¹å¤§â€”ä¸Šæµ·äº¤å¤§EMBLï¼ˆé«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ï¼‰é¡¹ç›®2015å¹´é¦–æ¬¡å¼€è¯¾'  href="emblgk.htm" tppabs="http://embl.chinadauphine.cn/News/emblgk.htm" class="fl fs14">å·´é»ä¹å¤§â€”ä¸Šæµ·äº¤å¤§EMBLï¼ˆé«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ï¼‰é¡¹ç›®2015å¹´é¦–æ¬¡å¼€è¯¾</a><span class="fr"><em>2015-04-22</em> <a title='å·´é»ä¹å¤§â€”ä¸Šæµ·äº¤å¤§EMBLï¼ˆé«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ï¼‰é¡¹ç›®2015å¹´é¦–æ¬¡å¼€è¯¾' href="emblgk.htm" tppabs="http://embl.chinadauphine.cn/News/emblgk.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li><li class="clearfix"><a title='å·´é»ä¹å¤§â€¢å¤§å¸ˆè®²å ‚ ï¼šã€Šåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²ã€‹'  href="hxdx.htm" tppabs="http://embl.chinadauphine.cn/News/hxdx.htm" class="fl fs14">å·´é»ä¹å¤§â€¢å¤§å¸ˆè®²å ‚ ï¼šã€Šåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²ã€‹</a><span class="fr"><em>2014-12-12</em> <a title='å·´é»ä¹å¤§â€¢å¤§å¸ˆè®²å ‚ ï¼šã€Šåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²ã€‹' href="hxdx.htm" tppabs="http://embl.chinadauphine.cn/News/hxdx.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li><li class="clearfix"><a title='EMBL â€¢ å…¬å¼€è¯¾ï¼šâ€œåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²â€'  href="emblgkk.htm" tppabs="http://embl.chinadauphine.cn/News/emblgkk.htm" class="fl fs14">EMBL â€¢ å…¬å¼€è¯¾ï¼šâ€œåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²â€</a><span class="fr"><em>2014-11-28</em> <a title='EMBL â€¢ å…¬å¼€è¯¾ï¼šâ€œåç°ä»£æ€§ï¼šä½æˆæœ¬ä¸å¥¢ä¾ˆå“å¸‚åœºåˆ†å‰²â€' href="emblgkk.htm" tppabs="http://embl.chinadauphine.cn/News/emblgkk.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li><li class="clearfix"><a title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ'  href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm" class="fl fs14">çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ</a><span class="fr"><em>2014-11-24</em> <a title='çƒ­çƒˆç¥è´ºå·´é»ä¹å¤§é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«æ¯•ä¸šç­”è¾©åœ†æ»¡æˆåŠŸ' href="bydb.htm" tppabs="http://embl.chinadauphine.cn/News/bydb.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li><li class="clearfix"><a title='å·´é»ä¹å¤§EMBLç¡•å£«å­¦ä½æ³•æ–¹é¡¹ç›®è¯´æ˜ä¼š'  href="xmsmh.htm" tppabs="http://embl.chinadauphine.cn/News/xmsmh.htm" class="fl fs14">å·´é»ä¹å¤§EMBLç¡•å£«å­¦ä½æ³•æ–¹é¡¹ç›®è¯´æ˜ä¼š</a><span class="fr"><em>2014-11-21</em> <a title='å·´é»ä¹å¤§EMBLç¡•å£«å­¦ä½æ³•æ–¹é¡¹ç›®è¯´æ˜ä¼š' href="xmsmh.htm" tppabs="http://embl.chinadauphine.cn/News/xmsmh.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li><li class="clearfix"><a title='ä¸Šæµ·äº¤å¤§- å·´é»ä¹å¤§  å¤§å¸ˆè®²å ‚ï¼šå¥¢ä¾ˆå“ç‰Œåœ¨ä¸­å›½ä¸»é¢˜è®ºå›åä¸½è½å¹•'  href="dsjt.htm" tppabs="http://embl.chinadauphine.cn/News/dsjt.htm" class="fl fs14">ä¸Šæµ·äº¤å¤§- å·´é»ä¹å¤§  å¤§å¸ˆè®²å ‚ï¼šå¥¢ä¾ˆå“ç‰Œåœ¨ä¸­å›½ä¸»é¢˜è®ºå›åä¸½è½å¹•</a><span class="fr"><em>2014-11-13</em> <a title='ä¸Šæµ·äº¤å¤§- å·´é»ä¹å¤§  å¤§å¸ˆè®²å ‚ï¼šå¥¢ä¾ˆå“ç‰Œåœ¨ä¸­å›½ä¸»é¢˜è®ºå›åä¸½è½å¹•' href="dsjt.htm" tppabs="http://embl.chinadauphine.cn/News/dsjt.htm"><img src="../images/common/new1.png" tppabs="http://embl.chinadauphine.cn/images/common/new1.png" /> è¯¦æƒ…</a></span></li></ul>
+                <div class="page">
+                    <div id="pgServer" class="left"><a id='a_First' lang='0' href='#'>é¦–é¡µ</a><a  id='a_Back' href='#'>ä¸Šä¸€é¡µ</a><a lang='0' class='cur' href='#' name='a_Num'>1</a><a lang='1' href='#' name='a_Num'>2</a><a lang='2' href='#' name='a_Num'>3</a><a lang='3' href='#' name='a_Num'>4</a><a lang='4' href='#' name='a_Num'>5</a><a lang='5' href='#' name='a_Num'>6</a><a lang='6' href='#' name='a_Num'>7</a><a lang='7' href='#' name='a_Num'>8</a><a lang='8' href='#' name='a_Num'>9</a><a lang='9' href='#' name='a_Num'>10</a><a id='a_Next' href='#'>ä¸‹ä¸€é¡µ</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  <script type="text/javascript" src="../../lead.soperson.com/10033182/10038934.js" tppabs="http://lead.soperson.com/10033182/10038934.js"></script>
+<div class="Footer">
+    <p class="FLeft">ç‰ˆæƒæ‰€æœ‰ï¼šå·´é»ä¹å¤§ä¸­å›½é¡¹ç›®åŠå…¬å®¤   æ²ªICPå¤‡10206337    åœ°å€ï¼šä¸Šæµ·å¸‚å¾æ±‡åŒºå¹¿å…ƒè¥¿è·¯55å· æµ©ç„¶ç§‘æŠ€å¤§å¦5æ¥¼</p>
+    <p class="FRight">ç”µè¯ï¼š400-0730-027    ä¼ çœŸï¼š021-5230 9590
+ï»¿<script>document.write(unescape('%3Cdiv%20style%3D%22display%3Anone%22%3E'));</script> <div class="parners"><li><a href="javascript:if(confirm('http://www.qhf.kr/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.kr/'" tppabs="http://www.qhf.kr/">www.qhf.kr</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.la/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.la/'" tppabs="http://www.qhf.la/">www.qhf.la</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.cz/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.cz/'" tppabs="http://www.qhf.cz/">www.qhf.cz</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.pl/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.pl/'" tppabs="http://www.qhf.pl/">www.qhf.pl</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.ca/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.ca/'" tppabs="http://www.qianhua.ca/">www.qianhua.ca</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.be/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.be/'" tppabs="http://www.qianhua.be/">www.qianhua.be</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.de/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.de/'" tppabs="http://www.qianhua.de/">www.qianhua.de</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.one/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.one/'" tppabs="http://www.qianhua.one/">www.qianhua.one</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.mobi/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.mobi/'" tppabs="http://www.qianhua.mobi/">www.qianhua.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.aish.kr/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.kr/'" tppabs="http://www.aish.kr/">www.aish.kr</a> </li> <li><a href="javascript:if(confirm('http://www.aish.la/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.la/'" tppabs="http://www.aish.la/">www.aish.la</a> </li> <li><a href="javascript:if(confirm('http://www.aish.nl/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.nl/'" tppabs="http://www.aish.nl/">www.aish.nl</a> </li> <li><a href="javascript:if(confirm('http://www.aish.pl/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.pl/'" tppabs="http://www.aish.pl/">www.aish.pl</a> </li> <li><a href="javascript:if(confirm('http://www.aish.ch/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.ch/'" tppabs="http://www.aish.ch/">www.aish.ch</a> </li> <li><a href="javascript:if(confirm('http://www.aish.cz/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.cz/'" tppabs="http://www.aish.cz/">www.aish.cz</a> </li> <li><a href="javascript:if(confirm('http://www.aish.one/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.one/'" tppabs="http://www.aish.one/">www.aish.one</a> </li> <li><a href="javascript:if(confirm('http://www.aish.mobi/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.mobi/'" tppabs="http://www.aish.mobi/">www.aish.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.kr/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.kr/'" tppabs="http://www.gzbb.kr/">www.gzbb.kr</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.la/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.la/'" tppabs="http://www.gzbb.la/">www.www.gzbb.la</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.me/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.me/'" tppabs="http://www.gzbb.me/">www.gzbb.me</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.ca/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.ca/'" tppabs="http://www.gzbb.ca/">www.gzbb.ca</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.be/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.be/'" tppabs="http://www.gzbb.be/">www.gzbb.be</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.ws/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.ws/'" tppabs="http://www.gzbb.ws/">www.gzbb.ws</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.tw/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.tw/'" tppabs="http://www.gzbb.tw/">www.gzbb.tw</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.one/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.one/'" tppabs="http://www.gzbb.one/">www.gzbb.one</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.mobi/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.mobi/'" tppabs="http://www.gzbb.mobi/">www.gzbb.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.kr/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.kr/'" tppabs="http://www.sh419.kr/">www.sh419.kr</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.la/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.la/'" tppabs="http://www.sh419.la/">www.sh419.la</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.be/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.be/'" tppabs="http://www.sh419.be/">www.sh419.be</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.ca/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.ca/'" tppabs="http://www.sh419.ca/">www.sh419.ca</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.de/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.de/'" tppabs="http://www.sh419.de/">www.sh419.de</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.ws/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.ws/'" tppabs="http://www.sh419.ws/">www.sh419.ws</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.xyz/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.xyz/'" tppabs="http://www.sh419.xyz/">www.sh419.xyz</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.one/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.one/'" tppabs="http://www.sh419.one/">www.sh419.one</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.mobi/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.mobi/'" tppabs="http://www.sh419.mobi/">www.sh419.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.kr/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.kr/'" tppabs="http://www.shlf.kr/">www.shlf.kr</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.be/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.be/'" tppabs="http://www.shlf.be/">www.shlf.be</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.tw/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.tw/'" tppabs="http://www.shlf.tw/">www.shlf.tw</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.pl/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.pl/'" tppabs="http://www.shlf.pl/">www.shlf.pl</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.ch/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.ch/'" tppabs="http://www.shlf.ch/">www.shlf.ch</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.cz/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.cz/'" tppabs="http://www.shlf.cz/">www.shlf.cz</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.nl/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.nl/'" tppabs="http://www.shlf.nl/">www.shlf.nl</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.one/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.one/'" tppabs="http://www.shlf.one/">www.shlf.one</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.biz/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.biz/'" tppabs="http://www.shlf.biz/">www.shlf.biz</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.mobi/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.mobi/'" tppabs="http://www.shlf.mobi/">www.shlf.mobi</a></li> </div><script>document.write(unescape('%3C/div%3E'));</script> <script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '../../push.zhanzhang.baidu.com/push.js'/*tpa=http://push.zhanzhang.baidu.com/push.js*/;
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4510659a5871de3f85f56949b0d6a894' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000424731'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1000424731%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>--></p>
+  
+</div>
+    </form>
+</body>
+</html>

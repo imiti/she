@@ -1,0 +1,107 @@
+/* CSS Document */
+* html { background-image: url(about:blank); background-attachment: fixed; zoom: expression(function(ele){ ele.style.zoom = "1"; document.execCommand("BackgroundImageCache", false, true); }(this)); }
+body { font-size: 12px; font-family: "Microsoft YaHei"; color: #000; background:#ededed;}
+html { overflow-y: scroll; }
+form, div, body, img, p, img, dl, dt, dd, input, h1, h2, h3, h4 { margin: 0px; padding: 0px; border: 0; }
+a { color: #333; text-decoration: none; }
+a:hover { text-decoration: none; }
+ul, li ,ol{ list-style: none; margin: 0; padding: 0; }
+input, textarea, select { color: #333; margin: 0; padding: 0; font-size: 12px; font-family: Arial; vertical-align: middle; }
+input:focus, textarea:focus { outline: none; }
+address, em, i { font-style: normal; }
+table { border-collapse: collapse; border-spacing: 0; table-layout: fixed; }
+input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner { border: none; padding: 0; }
+.none { float: left; width: 0; height: 0; overflow: hidden; }
+.clearfix:after { content: ""; clear: both; display: block; height: 0; }
+.clearfix { zoom: 1; }
+.FL { float: left; }
+.FR { float: right; }
+
+
+.MT28{margin-top:28px;}
+.MT18{margin-top:18px;}
+.MT35{margin-top:35px;}
+.MT10{margin-top:10px;}
+.MT8{margin-top:8px;}
+.MT20{margin-top:20px;}
+
+.ML73{margin-left:73px;}
+.ML229{margin-left:229px;}
+.ML40{margin-left:40px;}
+
+.MR10{margin-right:10px;}
+.MR13{margin-right:13px;}
+.MR86{margin-right:86px;}
+.MR38{margin-right:38px;}
+
+.W1000{width:1000px;margin:0 auto;}
+/*Header*/
+.Header .LogoLine h1{float:left;display:inline;}
+.Header .TopRight{float:right;display:inline;width:600px;text-align:right;}
+.Header .HotLine{float:right;display:inline;font-size:22px;color:#eb24b5;text-align:right;}
+.Header .TopRight .Txt{float:right;display:inline;font-size:14px;line-height:24px;padding-bottom:10px;color:#717171;}
+.Header .TopRight .Txt a{color:#717171;margin:0 3px;}
+.MenuNav{width:100%;height:42px;line-height:42px;background:#e727b3;margin-top:23px;border-bottom:1px solid #fff;}
+.MenuNav ul li{position:relative;float:left;display:inline;width:107px;height:42px;text-align:center;line-height:42px;font-size:15px;font-family:"Micorosft YaHei";}
+.MenuNav ul li a{display:block;font-weight:bold;color:#fff;font-family:"Microsoft YaHei;"}
+.MenuNav ul li.cur a,.MenuNav ul li a:hover{background:urL("../images/MenuNavH.png")/*tpa=http://embl.chinadauphine.cn/images/MenuNavH.png*/ center no-repeat;}
+.MenuNav ul li .SubNav{position:absolute;z-index:9999;left:15px;top:42px;display:none;}
+.MenuNav ul li .SubNav .NavCont{float:left;display:inline;width:91px;background:url("../images/SubNavLine.png")/*tpa=http://embl.chinadauphine.cn/images/SubNavLine.png*/ bottom center repeat-y;}
+.MenuNav ul li .SubNav .NavCont a{display:block;background:url("../images/NavContline.jpg")/*tpa=http://embl.chinadauphine.cn/images/NavContline.jpg*/ bottom center repeat-x;}
+.MenuNav ul li .SubNav .NavCont .LNone a:hover{background:#e727b3;}
+.MenuNav ul li .SubNav img{float:left;display:inline;}
+.MenuNav ul li .SubNav  a:hover{background:#e727b3;}
+.MenuNav ul li .SubNav .NavCont .LNone a{background:none;}
+.MenuNav ul li .SubNav .NavCont .LNone a:hover{background:#e727b3;}
+
+
+.HeaderNav{width:100%;height:70px;background:#000;position:fixed;top:0;z-index:9999;}
+.HeaderNav .HeadCon{width:1232px;height:70px;margin:0 auto;}
+.HeaderNav h1{float:left;display:inline;margin-top:15px;width:111px;height:47px;}
+.HeaderNav ul{float:left;display:inline;margin-left:15px;width:960px;}
+.HeaderNav ul li{ position:relative;float:left;display:inline;line-height:70px;font-size:14px;color:#d59a50;text-align:center;}
+.HeaderNav ul li .Title{color:#ededed;display:block;height:70px;padding:0 40px;font-weight:bold;font-family:"boldface";border-right:1px solid #2f2f2f;}
+.HeaderNav ul li .Title.cur,.HeaderNav ul li .Title:hover{color:#000;background:#ededed;}
+.HeaderNav .TellImg{float:right;display:inline;margin-top:19px;width:131px;height:35px;}
+.HeaderNav ul li .SubNav{display:none;position:absolute;top:70px;left:0;z-index:99999;width:99%;background:#ededed;}
+.HeaderNav ul li .SubNav span{display:block;height:39px;line-height:39px;}
+.HeaderNav ul li .SubNav span a{color:#000;height:39px;line-height:39px;}
+.HeaderNav ul li .SubNav span a:hover{background:#000;display:block;color:#fff;}
+
+#fullpage{position:relative;}
+#Arrow{background:url("../images/ArrowImg1.png")/*tpa=http://embl.chinadauphine.cn/images/ArrowImg1.png*/ no-repeat;width:74px;height:74px;position:absolute;left:50%;bottom:-20px;z-index:9999;cursor:pointer;filter:alpha(opacity=90);opacity:0.9;}
+#ZXBtn{background:url("../images/ZXBtn.jpg")/*tpa=http://embl.chinadauphine.cn/images/ZXBtn.jpg*/ no-repeat;width:153px;height:58px;position:absolute;left:48%;bottom:150px;z-index:9999;cursor:pointer;}
+#fullpage .slide p{overflow:hidden;text-indent:-9999px;height:0;font-size:0;line-height:0;}
+
+.Footer{width:100%;height:50px;margin-top:20px;background:#000;line-height:50px;color:#7f7474;}
+.Footer .FLeft{float:left;display:inline;margin-left:5px;}
+.Footer .FLeft{float:right;display:inline;margin-right:5px;}
+
+.CerList dl{width:772px;height:232px;margin-bottom:23px;-moz-box-shadow: 3px 3px 3px #e6e6e6;-webkit-box-shadow:3px 3px 3px #e6e6e6;box-shadow:3px 3px 3px #e6e6e6;background:#fff;}
+.CerList dl dt{float:left;display:inline;width:250px;text-align:center;padding-top:30px;border-right:1px solid #d5d5d5;height:202px;}
+.CerList dl dd{float:left;display:inline;width:472px;padding-left:36px;}
+.CerList dl dd strong{display:block;font-size:14px;color:#000;line-height:24px;margin-top:29px;}
+.CerList dl dd p{line-height:19px;margin-top:18px;}
+
+.IntrodCont .DeveLopp{position:relative;background:url("../images/developmenImg1.jpg")/*tpa=http://embl.chinadauphine.cn/images/developmenImg1.jpg*/ no-repeat;width:773px;height:369px;}
+.IntrodCont .DeveLopp .Text{position:absolute;top:85px;right:17px;width:313px;line-height:24px;color:#ededed;line-height:24px;}
+.IntrodCont .DeveLopp .Text p{color:#ededed;}
+.IntrodCont img{margin-top:20px;}
+
+.IntrodCont .Title{color:#000;line-height:24px;}
+.IntrodCont p{line-height:24px;margin:5px 0;color:#787878;}
+.IntrodCont .Ageent{margin-top:10px;margin-bottom:10px;}
+.IntrodCont .Ageent dt{line-height:24px;color:#d59a50;}
+.IntrodCont .Ageent dd ul li{color:#d59a50;line-height:24px;padding-left:15px;background:url("../images/AwworIcon.png")/*tpa=http://embl.chinadauphine.cn/images/AwworIcon.png*/ left 6px no-repeat;}
+
+.IntrodCont .Honor{margin-top:20px;}
+.IntrodCont .Honor .HTitle{display:block;margin-bottom:13px;border-bottom:1px solid #cfcfcf;font-size:24px;color:#d59a50;font-weight:normal;padding-left:52px;height:34px;padding-top:24px;padding-bottom:3px;background:url("../images/HTitleBg.png")/*tpa=http://embl.chinadauphine.cn/images/HTitleBg.png*/ left center no-repeat;}
+.ListX li{line-height:24px;color:#d59a50;padding-left:20px;background:url("../images/AwworIcon.png")/*tpa=http://embl.chinadauphine.cn/images/AwworIcon.png*/ left 6px no-repeat;}
+.MT10{margin-top:15px;}
+.TechList li{line-height:24px;color:#787878;}
+
+/*管理研究*/
+.ResearchCont .T{display:inline-block;margin-bottom:10px;color:#fff;background:#000000;line-height:20px;padding:0 8px;}
+.ResearchCont p{line-height:24px;margin-bottom:10px;color:#787878;}
+.BLList li{line-height:24px;color:#787878;padding-left:15px;background:url("../images/Icont2.png")/*tpa=http://embl.chinadauphine.cn/images/Icont2.png*/ left 6px no-repeat;}
+.ResearchCont em{color:#d59a50;}

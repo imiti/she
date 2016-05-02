@@ -1,0 +1,60 @@
+.SubBanner{position:relative;overflow:hidden;width:100%;height:237px; margin-top:70px;}
+.SubBanner img{position:absolute;left:50%;width:1920px;margin-left:-960px;}
+
+.SubMain{position:relative;width:1000px;margin:0 auto;}
+.AsideLeft{float:left;display:inline;width:202px;}
+.AsideMenu ul li{width:202px;height:45px;line-height:45px;background:#000;margin-bottom:1px;}
+.AsideMenu ul li a{background:#000;color:#ededed;text-align:center;display:block;}
+.AsideMenu ul li.cur a,.AsideMenu ul li a:hover{background:#d59a50  url("../images/common/nav_bg.png")/*tpa=http://embl.chinadauphine.cn/images/common/nav_bg.png*/ no-repeat 55px center;color:#000;}
+.AsideMenu .Tit{display:block;width:202px;height:72px;background:#eeeeed;filter:alpha(opacity=90);opacity:0.9;text-align:center;line-height:72px;font-size:24px;font-weight:normal;color:#000000;position:absolute;top:-72px;z-index:9990;}
+.AsideAd1{margin-top:23px;display:block;}
+
+
+.RightCont{float:right;display:inline;width:770px;}
+.RightCont .Position{text-align:right;border-bottom:1px solid #d4d4d4;margin-bottom:30px;line-height:26px;margin-top:8px;color:#676666;}
+.RightCont .Position a{color:#676666;}
+.RightCont .ZC{float:left;display:inline;width:492px;}
+.RightCont .Position a:hover,.RightCont .Position span{color:#d59a50;}
+.RightCont .ZC dl dt strong{display:block;background:#000000;width:160px;height:19px;line-height:19px;color:#ededed;text-align:center;}
+.RightCont .ZC dl dd p{line-height:20px;margin-top:10px;color:#787878;}
+.RightCont .ZC dl{margin-bottom:30px;}
+.RightCont .Xiao{float:right;display:inline;width:262px;}
+.RightCont .Xiao .Txt{width:262px;height:60px;display:block;background:#000000;line-height:60px;text-align:center;color:#939393;}
+
+.Contcat{width:860px;margin:45px auto 0;}
+.ContLeft{float:left;display:inline;width:462px;height:453px;padding:10px;background:#fff;}
+.ContLeft .Address{width:432px;height:102px;padding-top:10px;padding-left:30px;background:#161616;}
+.ContLeft .Address p{line-height:24px;color:#ededed;font-size:17px;}
+.ContLeft .Address img{margin-top:10px;}
+.MAP{width:460px;height:338px;border:1px solid #d3d3d3;}
+
+.BiaoMin{position:relative;float:left;display:inline;margin-left:31px;width:344px;height:475px;background:url("../images/applyBg.jpg")/*tpa=http://embl.chinadauphine.cn/images/applyBg.jpg*/ no-repeat;}
+.BiaoMin .Title{display:block;height:55px;font-size:24px;color:#ededed;line-height:55px;text-align:center;font-size:24px;}
+
+.ParTnerCont{width:770px;position:relative;overflow:hidden;}
+.ParInter{margin-left:-15px;}
+.ParTnerCont dl{float:left;display:inline;width:377px;height:468px;margin-bottom:15px;margin-left:15px;background:#fff;-moz-box-shadow: 3px 3px 3px #ededed;-webkit-box-shadow: 3px 3px 3px #ededed;box-shadow: 3px 3px 3px #ededed;}
+.ParTnerCont dl dt{height:171px;border-bottom:1px solid #d4d4d4;}
+.ParTnerCont dl dd{padding-left:26px;padding-top:30px;width:327px;}
+.ParTnerCont dl dd strong{display:block;line-height:22px;color:#000;}
+.ParTnerCont dl dd p{margin-top:15px;line-height:20px;color:#676666}
+.PageNext{text-align:right;}
+.PageNext a{margin:0 6px;padding:2px 4px;border:1px solid #000;}
+.PageNext a.cur,.PageNext a:hover{background:#d59a50;border:1px solid #d59a50;color:#fff;}
+.page .left a.cur{background:#d59a50;  margin-right:5px;}
+.page .left a:hover{background:#d59a50; }
+
+.WTList dl{margin-bottom:35px;}
+.WTList dl dt{background:#000;width:773px;height:25px;line-height:25px;color:#ededed; margin-bottom:10px;}
+.WTList dl dt span{padding-left:36px;background:url("../images/WenIcon.png")/*tpa=http://embl.chinadauphine.cn/images/WenIcon.png*/ 2px 2px no-repeat;height:21px;line-height:21px;display:block;}
+.WTList dl dd{background:url("../images/DanIcon.png")/*tpa=http://embl.chinadauphine.cn/images/DanIcon.png*/ no-repeat;padding-left:37px;}
+.WTList dl dd ul{margin-top:16px;}
+.WTList dl dd ul li{line-height:22px;color:#777;}
+
+.ProcessCont{background:#fff;width:771px;height:464px;}
+.ProcessImg{float:left;display:inline;margin:39px 0 0 60px;}
+.DownCont{float:left;display:inline;margin-top:10px;margin-left:55px;position:relative;background:url("../images/PrImg1.jpg")/*tpa=http://embl.chinadauphine.cn/images/PrImg1.jpg*/ no-repeat;width:444px;height:445px;}
+.DownCont .Btn{position:absolute;right:81px;bottom:179px;}
+
+.DownLoadTxt a{position:absolute;bottom:33px;right:16px;padding-right:23px;background:url("../images/DownLoadIcon.png")/*tpa=http://embl.chinadauphine.cn/images/DownLoadIcon.png*/ right center no-repeat;color:#000;}
+.DownLoadTxt a:hover{text-decoration:underline;}

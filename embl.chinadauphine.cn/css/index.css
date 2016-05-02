@@ -1,0 +1,33 @@
+body{background:#ededed;}
+.IndexMain{margin:130px auto 0;width:88%;}
+.IndexMain .PublicBox{float:left;display:inline;width:31%;height:603px;background:#fff;}
+.IndexMain .PublicBox .Box{position:relative;padding:0 10px;line-height:24px;color:#636363;}
+.IndexMain .PublicBox .Box h2{margin-top:20px;font-size:18px;margin-bottom:26px;font-family:"Microsoft YaHei";font-weight:normal;text-align:center;background:url("../images/PublicBoxTitle.png")/*tpa=http://embl.chinadauphine.cn/images/PublicBoxTitle.png*/ center 6px no-repeat;}
+.IndexMain .PublicBox .Box .Txt{margin-top:18px;color:#636363;}
+.IndexMain .Mjj{margin:0 3.4%;}
+
+.MoreIndrouct{display:block;background:#000;width:110px;height:26px;margin-top:32px;margin-left:40%;text-align:center;color:#fff;}
+.MoreIndrouct:hover{background:#d59a50;}
+.NewsList{margin-top:20px;}
+.NewsList li{height:22px;line-height:22px;padding-bottom:7px;border-bottom:1px dashed #636363;padding-top:10px;}
+.NewsList li .S_1{float:left;display:inline;}
+.NewsList li .S_2{float:right;display:inline;}
+.NewsList li a{color:#636363;}
+.NewsList li a:hover{color:#d59a50;}
+.ActivityTxt{ text-align:center; width:100%;height:122px;background:#000;position:absolute;bottom:0;left:0;filter:alpha(opacity=80);opacity:0.8;}
+.ActivityTxt .MoreIndrouct{margin-top:4px;padding-top:5px;}
+.ActivityTxt .Txt1{font-size:14px;height:60px;line-height:25px;text-align:center;padding-top:21px;color:#fff;}
+
+/*近期活动切换*/
+#focus { width: 432px; height:506px; clear: both; overflow: hidden; position: relative; }
+#focus ul {  float: left; position: absolute; clear: both; padding: 0px; margin: 0px; }
+#focus ul li { height:506px; float: left; overflow: hidden; position: relative; padding: 0px; margin: 0px; }
+#focus .preNext {width:45px;height:100px;position: absolute; top:159px; cursor: pointer; }
+#focus .pre { left: 0; background: url("../images/sprite.png")/*tpa=http://embl.chinadauphine.cn/images/sprite.png*/ no-repeat left center; }
+#focus .next { right: 0; background: url("../images/sprite1.png")/*tpa=http://embl.chinadauphine.cn/images/sprite1.png*/ no-repeat right center; }
+
+.IndexCource{text-align:center;padding-top:92px;color:#636363;}
+.IndexCource a{margin:0 6px;font-size:12px;font-family:"Microsoft YaHei";line-height:24px;color:#636363;}
+.IndexGaoji{line-height:24px;color:#636363;font-size:14px;margin-top:10px;text-align:center;}
+.PSW{text-align:center;margin-top:5px;}
+

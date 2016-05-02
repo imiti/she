@@ -1,0 +1,285 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text ml; charset=utf-8" /><meta id="Key" name="Keywords" content="å¥¢ä¾ˆå“ç®¡ç†è¿›ä¿®,å·´é»Žä¹å¤§,EMBL,EMBåŸ¹è®­" /><meta id="Des" name="Description" content="å·´é»Žä¹å¤§EMBLåŸ¹è®­,å¥¢ä¾ˆå“ç®¡ç†è¿›ä¿®å¸¸è§é—®é¢˜è¯¦æƒ…å›žç­”." /><title>
+	å¥¢ä¾ˆå“ç®¡ç†è¿›ä¿®å¸¸è§é—®é¢˜--å·´é»Žä¹å¤§EMBLåŸ¹è®­
+</title>
+<script src="../js/jquery.js" tppabs="http://embl.chinadauphine.cn/js/jquery.js" type="text/javascript"></script>
+<link href="../css/default.css" tppabs="http://embl.chinadauphine.cn/css/default.css" rel="stylesheet" type="text/css" /><link href="../css/zi.css" tppabs="http://embl.chinadauphine.cn/css/zi.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-1.7.1.min.js" tppabs="http://embl.chinadauphine.cn/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("a[name=a_Num]").live("click", function () {
+            $("a[name=a_Num]").removeClass("cur");
+            $(this).addClass("cur");
+            var pageIndex = $(this).attr("lang");
+            doPage(pageIndex);
+        });
+
+        //ç¬¬ä¸€é¡µ
+        $("#a_First").live("click", function () {
+            var pageIndex = "0";
+            setPageCss(pageIndex);
+            doPage(pageIndex);
+        });
+
+        //ä¸Šä¸€é¡µ
+        $("#a_Back").live("click", function () {
+
+            var curIndex = $("a[class=cur]").attr("lang");
+
+            var pageCount = parseInt($("a[name=a_Num]").length) - 1;
+            var backId = (parseInt(curIndex) - 1);
+            // alert(curIndex);
+            if (backId >= 0) {
+                setPageCss(backId);
+                doPage(backId);
+            }
+        });
+
+        //ä¸‹ä¸€é¡µ
+        $("#a_Next").live("click", function () {
+            var curIndex = $("a[class=cur]").attr("lang");
+            var pageCount = parseInt($("a[name=a_Num]").length) - 1;
+            var nextId = (parseInt(curIndex) + 1);
+           // alert(curIndex);
+            if (nextId <= pageCount) {
+               
+                setPageCss(nextId);
+                doPage(nextId);
+            }
+        });
+
+        //è®¾ç½®é¡µé¢é€‰ä¸­æ ·å¼
+        function setPageCss(pageIndex) {
+            $("a[name=a_Num]").removeClass("cur");
+            $("a[name=a_Num]").each(function () {
+                if ($(this).attr("lang") == pageIndex)
+                    $(this).addClass("cur");
+            });
+        }
+
+        //åŠ è½½åˆ†é¡µæ•°æ®
+        function doPage(pageIndex) {
+            $("#stIndex").html(parseInt(pageIndex) + 1);
+            //alert("aaa :" + pageIndex);
+            $.post("http://embl.chinadauphine.cn/ashx/Pagesite.ashx", { "action": "getcjwt", pageIndex: pageIndex, rd: Math.random(1) }, function (data) {
+                // alert(data);
+                $("#ul_List").empty();
+                $("#ul_List").prepend(data);
+                // $("#ul_List").html(data.d);
+            });
+            //            $.ajax({
+            //                type: "post",
+            //                url: "default.aspx/GetList",
+            //                data: "{'pageIndex':'" + pageIndex + "'}",
+            //                contentType: "application/json; charset=utf-8",
+            //                dataType: "json",
+            //                success: function (data) {
+            //                    $("#ul_List").html(data.d);
+            //                },
+            //                error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //                    alert(XMLHttpRequest.status);
+            //                    alert(XMLHttpRequest.readyState);
+            //                    alert(textStatus);
+            //                }
+            //            });
+        }
+    })
+</script>
+
+</head>
+<body>
+<form name="form1" method="post" action="javascript:if(confirm('http://embl.chinadauphine.cn/admissions/default.htm?__VIEWSTATE=/wEPDwULLTExNTU1NTY3NjUPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhui/m+S/rizlt7Tpu47kuZ3lpKcsRU1CTCxFTULln7norq1kAgIPFgIfAAVF5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbov5vkv67luLjop4Hpl67popjor6bmg4Xlm57nrZQuZAIDD2QWBgIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE3MTkxODUuanBnIiBhbHQ9J+aLm+eUn+eUs+ivtycgLz5kAgkPFgIfAQXoGzxkbD48ZHQ+PHNwYW4+5aaC5L2V5oql5ZCN77yfPC9zcGFuPjwvZHQ+PGRkPuaCqOWNs+WPr+mAmui/h+e9keermeWcqOe6v+ebtOaOpeaKpeWQje+8m+aIluWcqEVNQkznmoTlrpjnvZHkuIvovb3nlLPor7fooajvvIzloavlhpnlrozlkI7pgJrov4fku6XkuIvmlrnlvI/nm7TmjqXkuI7miJHku6zogZTns7vvvJoNCkZheO+8mjg2IDIxIDUyMzAgOTU5MA0K6IGU57O755S16K+d77yaODYgMjEgNjIxNSAxMDA5IOadjuiAgeW4iA0K6YKu5Lu25Zyw5Z2AOiBlbWJsQGNoaW5hZGF1cGhpbmUuY248L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7og73lkKbku4vnu43kuIvluIjotYTpmJ/kvI3nmoTog4zmma/vvJ88L3NwYW4+PC9kdD48ZGQ+5be06buO5Lmd5aSn55qE57K+6Iux5biI6LWE5Zui6Zif5Zyo5YW25LiT5Lia6aKG5Z+f6KKr5YWs6K6k5Li65LiW55WM5p2D5aiB5Lq65aOr44CC5LuW5Lus5r2c5b+D5pWZ5a2m5LiO56CU56m277yM5Zyo5pyA5paw55qE566h55CG5Y+R5bGV6LaL5Yq/5Lit5L+d5oyB6aG25bCW5a2m5pyv5rC05bmz44CCIA0K4peP6aG555uu6LSf6LSj5Lq6RGVuaXMgREFSUFnlnKjlpaLkvojlk4HnrqHnkIbmlZnlrabmlrnpnaLlhbfmnInmnYPlqIHmgKfjgIJEYXJweeaVmeaOiOaYr+azleWbveW3tOm7juS5neWkp+aVmeaOiO+8jOW4guWcuuiQpemUgOWtpuenkeW4puWktOS6uu+8jOabvuaLheS7u+W+rui9r+WFrOWPuOmhueebruS4u+euoe+8jExvdHVz56CU5Y+R5Zu96ZmF5Lqn5ZOB5Li7566h44CB5Lqn5ZOB6JCl6ZSA6LSf6LSj5Lq677yM5Lul5Y+K5rOV5Zu9VGVrdHJvbml45YWs5Y+45biC5Zy66JCl6ZSA6LSf6LSj5Lq6562J44CC5Li76KaB56CU56m26aKG5Z+f5pyJ77ya5aWi5L6I5ZOB5biC5Zy65a2m77yM5raI6LS56ICF6KGM5Li65a2m77yM5biC5Zy65oiY55Wl77yM5ZOB54mM5bu66K6+5LiO566h55CG44CCDQril4/mjojor77ogIHluIhHZXJhbGQgTWF6emFsb3Zv77yM5be06buO5Lmd5aSn5aWi5L6I5ZOB566h55CG6K6y5biI77yM5rOV5Zu96auY562J57uP5rWO5LiO5ZWG5Lia5a2m6Zmi77yIRVNTRUPvvInlpaLkvojlk4Hlk4HniYznrqHnkIZNQkHor77nqIvnmoTotJ/otKPkurrjgILmr5XkuJrkuo7ms5Xlm73pq5jnrYnljJblrablrabpmaLvvIzojrflvpfljJblrablt6XnqIvluIjlrabkvY3vvIzkuYvlkI7kuo7nvo7lm73lk6XkvKbmr5TkuprlpKflrabojrflvpdNQkHlrabkvY3vvIzmm77miafmlZnkuo7opb/nj63niZnpqazlvrfph4xFbXByZXNh5a2m6Zmi5ZKM5oSP5aSn5Yip57Gz5YWw5qyn5rSy6K6+6K6h5a2m6Zmi44CC5pu+5Lu76I+y5ouJ5qC85bmV77yIU2FsdmF0b3JlIEZlcnJhZ2Ftb++8iee6vee6pueahOexs+WFsOeahENFT++8jOilv+ePreeJmee9l+Woge+8iExvZXdl77yJ5LiO55Ge5aOr55m+5Li96ZuG5Zui77yIQmFsbHnvvInnmoTmgLvoo4HjgILkuLvopoHnoJTnqbbmlrnlkJHmnInvvJrlk4HniYznrqHnkIbvvIzkvIHkuJrmnoTlu7rvvIzmiJjnlaXlrprkuYnkuI7lupTnlKjjgIINCuivvueoi+WFtuS7lueahOaVmeaOiOWSjOW6p+WuouWYieWuvumDveadpeiHquS4lueVjOWlouS+iOWTgeWTgeeJjOeahENFT++8jOmrmOWxgueuoeeQhue7j+eQhuS6uu+8jOS7peWPiuS4gOS6m+WbvemZheWTgeeJjOS6muWkquWMuuaIluS4reWbveWMuueahOS8geS4muWutuWSjOmrmOeuoeOAgeS4lueVjOefpeWQjeWSqOivouWFrOWPuOOAgeWkp+Wei+aKlei1hOWFrOWPuOeahOWQiOS8meS6uuOAgeW+i+W4iOWPiuiJuuacr+eVjOeahOefpeWQjeS6uuWjq+OAgeWTgeeJjOiuvuiuoeaAu+ebkeetieetieOAguS7luS7rOmDveWFt+acieWkmuW5tOWlouS+iOWTgSbpq5jnq6/lk4HniYznrqHnkIbmioDog73lkozlrp7miJjnu4/pqozjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabkuJrlrozmr5XlkI7lsIbojrflvpfku4DkuYjor4HkuaY/PC9zcGFuPjwvZHQ+PGRkPuazleWbveWbveWutuehleWjq+WtpuS9jeOAgeW3tOm7juS5neWkp+aOiOS6iOeahOmrmOe6p+WlouS+iOWTgeeuoeeQhuehleWjq+WtpuS9jeWSjOS4iua1t+S6pOmAmuWkp+WtpumigeWPkeeahOOAiuS4iua1t+S6pOmAmuWkp+WtpkVNQkzpq5jnuqflpaLkvojlk4HnrqHnkIbor77nqIvnu5PkuJror4HkuabjgIvvvIzlubbmnInmlZnmjojnrb7lkI3nmoTljZXpl6jor77nqIvlrabkuaDor4TkvLDljZXjgILor4HkuabmmK/lrabkuaDnu4/ljobnmoTor4HmmI7vvIzmr4/kuKrkurrnmoTogYzkuJrnlJ/mtq/kuK3vvIzpnIDopoHkuI3mlq3nmoTlrabkuaDlkozlhYXlrp7miY3og73ovr7liLDmm7Tpq5jnmoTkuovkuJrnm67moIfjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabotLnmmK/lpJrlsJHvvIzlpoLkvZXmlK/ku5jvvJ88L3NwYW4+PC9kdD48ZGQ+5a2m6LS55Li76KaB55Sx5Lq65rCR5biB5ou+5aO55LiH6IKG5Luf5YWD5pW077yIUk1CMTE077yMMDAwICnvvIjkuqTlpKfpg6jliIbvvInku6Xlj4rkurrmsJHluIHmi77lo7nkuIfogobku5/lhYPmlbQoUk1CMTE077yMMDAwKe+8iOS5neWkp+mDqOWIhu+8ieOAguesrOS4gOmDqOWIhueahOe8tOi0uemcgOimgeWcqOW8gOWtpuWJjeWujOaIkOOAguesrOS6jOmDqOWIhueahOe8tOi0ueWImemcgOimgeWcqOW8gOWtpuWQjjPkuKrmnIjkuYvlhoXlrozmiJDjgILms6jlhozotLk0NTDmrKcv5bm077yI4oKsNDUwL3llYXLvvIks5rW35aSW5pyN5Yqh6LS55aO55Luf5LyN5L2w5qyn77yI4oKsMTUwMO+8iTwvZGQ+PC9kbD48ZGw+PGR0PjxzcGFuPuWmguaenOaIkeWboOS4uuW3peS9nOWOn+WboO+8jOayoeacieWPguWKoOWFtuS4reeahOS4gOmXqOivvueoi++8jOS8muacieW9seWTjeWQl++8nzwvc3Bhbj48L2R0PjxkZD7pgJrluLjmg4XlhrXkuIvvvIzmlZnmjojkvJrmr4/kuKrmnIjlnKjkuIrmtbfpm4bkuK3mjojor74xLTLmrKHvvIzmr4/mrKHmjojor74z5aSp44CC5oiR5Lus6ZyA6KaB5oiR5Lus55qE5a2m55Sf6Iez5bCR5Ye65bit5LiN5bCR5LqOMuWkqeeahOivvueoi++8jOWmguaenOS9oOe8uuW4reS6huaJgOaciei2hei/hzHlpKnnmoTor77nqIvvvIzlsLHml6Dms5Xmi7/liLDmraTmrKHor77nqIvnmoTlrabliIbvvIzpnIDnrKzkuozlubTph43mlrDkv67or7vvvIzkvJrlr7zoh7TkvaDml6Dms5XmjInml7bmr5XkuJrjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lt7Tpu47kuZ3lpKflnKjms5Xlm73nmoTlpaLkvojlk4HnrqHnkIbor77nqIvmmK/mgI7moLfnmoTvvJ88L3NwYW4+PC9kdD48ZGQ+5Zyo5rOV5Zu977yM5be06buO5Lmd5aSn5Li65bm06L275a2m5ZGY5o+Q5L6bTE1FQeeahOivvueoi++8iEx1eHVyeSBNYW5hZ2VtZW50IGluIEV1cm9wZSBhbmQgQXNpYSDmrKfkuprlpaLkvojlk4HnrqHnkIbnoZXlo6vvvInvvIzkuLvopoHlrablkZjlubTpvoTlnKgyMuWIsDI15bKB44CCDQrlnKjkuK3lm73vvIznlLHkuo5FTUJM5piv6auY57qn57uP55CG5Lq65a2m5L2N6K++56iL77yM5omA5Lul5oiR5Lus55qE5a2m5ZGY5bm06b6E5Li76KaB5ZyoMzDliLA0NeWygeOAguiHs+WwkTXlubTku6XkuIrlt6XkvZznu4/pqozjgII8L2RkPjwvZGw+ZAILDxYCHwEFnwI8YSBpZD0nYV9GaXJzdCcgbGFuZz0nMCcgaHJlZj0nIyc+6aaW6aG1PC9hPjxhICBpZD0nYV9CYWNrJyBocmVmPScjJz7kuIrkuIDpobU8L2E+PGEgbGFuZz0nMCcgY2xhc3M9J2N1cicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjE8L2E+PGEgbGFuZz0nMScgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjI8L2E+PGEgbGFuZz0nMicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjM8L2E+PGEgbGFuZz0nMycgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjQ8L2E+PGEgaWQ9J2FfTmV4dCcgaHJlZj0nIyc+5LiL5LiA6aG1PC9hPmRko93Ho0xEvvUV3qrDifx/28QKyb4ITyu4Ma/Ilphes0k=&__VIEWSTATEGENERATOR=31BD29A7  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ·þÎñÆ÷±¨¸æ¸ÃÎÄ¼þÎ´ÕÒµ½¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://embl.chinadauphine.cn/admissions/default.htm?__VIEWSTATE=/wEPDwULLTExNTU1NTY3NjUPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhui/m+S/rizlt7Tpu47kuZ3lpKcsRU1CTCxFTULln7norq1kAgIPFgIfAAVF5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbov5vkv67luLjop4Hpl67popjor6bmg4Xlm57nrZQuZAIDD2QWBgIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE3MTkxODUuanBnIiBhbHQ9J+aLm+eUn+eUs+ivtycgLz5kAgkPFgIfAQXoGzxkbD48ZHQ+PHNwYW4+5aaC5L2V5oql5ZCN77yfPC9zcGFuPjwvZHQ+PGRkPuaCqOWNs+WPr+mAmui/h+e9keermeWcqOe6v+ebtOaOpeaKpeWQje+8m+aIluWcqEVNQkznmoTlrpjnvZHkuIvovb3nlLPor7fooajvvIzloavlhpnlrozlkI7pgJrov4fku6XkuIvmlrnlvI/nm7TmjqXkuI7miJHku6zogZTns7vvvJoNCkZheO+8mjg2IDIxIDUyMzAgOTU5MA0K6IGU57O755S16K+d77yaODYgMjEgNjIxNSAxMDA5IOadjuiAgeW4iA0K6YKu5Lu25Zyw5Z2AOiBlbWJsQGNoaW5hZGF1cGhpbmUuY248L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7og73lkKbku4vnu43kuIvluIjotYTpmJ/kvI3nmoTog4zmma/vvJ88L3NwYW4+PC9kdD48ZGQ+5be06buO5Lmd5aSn55qE57K+6Iux5biI6LWE5Zui6Zif5Zyo5YW25LiT5Lia6aKG5Z+f6KKr5YWs6K6k5Li65LiW55WM5p2D5aiB5Lq65aOr44CC5LuW5Lus5r2c5b+D5pWZ5a2m5LiO56CU56m277yM5Zyo5pyA5paw55qE566h55CG5Y+R5bGV6LaL5Yq/5Lit5L+d5oyB6aG25bCW5a2m5pyv5rC05bmz44CCIA0K4peP6aG555uu6LSf6LSj5Lq6RGVuaXMgREFSUFnlnKjlpaLkvojlk4HnrqHnkIbmlZnlrabmlrnpnaLlhbfmnInmnYPlqIHmgKfjgIJEYXJweeaVmeaOiOaYr+azleWbveW3tOm7juS5neWkp+aVmeaOiO+8jOW4guWcuuiQpemUgOWtpuenkeW4puWktOS6uu+8jOabvuaLheS7u+W+rui9r+WFrOWPuOmhueebruS4u+euoe+8jExvdHVz56CU5Y+R5Zu96ZmF5Lqn5ZOB5Li7566h44CB5Lqn5ZOB6JCl6ZSA6LSf6LSj5Lq677yM5Lul5Y+K5rOV5Zu9VGVrdHJvbml45YWs5Y+45biC5Zy66JCl6ZSA6LSf6LSj5Lq6562J44CC5Li76KaB56CU56m26aKG5Z+f5pyJ77ya5aWi5L6I5ZOB5biC5Zy65a2m77yM5raI6LS56ICF6KGM5Li65a2m77yM5biC5Zy65oiY55Wl77yM5ZOB54mM5bu66K6+5LiO566h55CG44CCDQril4/mjojor77ogIHluIhHZXJhbGQgTWF6emFsb3Zv77yM5be06buO5Lmd5aSn5aWi5L6I5ZOB566h55CG6K6y5biI77yM5rOV5Zu96auY562J57uP5rWO5LiO5ZWG5Lia5a2m6Zmi77yIRVNTRUPvvInlpaLkvojlk4Hlk4HniYznrqHnkIZNQkHor77nqIvnmoTotJ/otKPkurrjgILmr5XkuJrkuo7ms5Xlm73pq5jnrYnljJblrablrabpmaLvvIzojrflvpfljJblrablt6XnqIvluIjlrabkvY3vvIzkuYvlkI7kuo7nvo7lm73lk6XkvKbmr5TkuprlpKflrabojrflvpdNQkHlrabkvY3vvIzmm77miafmlZnkuo7opb/nj63niZnpqazlvrfph4xFbXByZXNh5a2m6Zmi5ZKM5oSP5aSn5Yip57Gz5YWw5qyn5rSy6K6+6K6h5a2m6Zmi44CC5pu+5Lu76I+y5ouJ5qC85bmV77yIU2FsdmF0b3JlIEZlcnJhZ2Ftb++8iee6vee6pueahOexs+WFsOeahENFT++8jOilv+ePreeJmee9l+Woge+8iExvZXdl77yJ5LiO55Ge5aOr55m+5Li96ZuG5Zui77yIQmFsbHnvvInnmoTmgLvoo4HjgILkuLvopoHnoJTnqbbmlrnlkJHmnInvvJrlk4HniYznrqHnkIbvvIzkvIHkuJrmnoTlu7rvvIzmiJjnlaXlrprkuYnkuI7lupTnlKjjgIINCuivvueoi+WFtuS7lueahOaVmeaOiOWSjOW6p+WuouWYieWuvumDveadpeiHquS4lueVjOWlouS+iOWTgeWTgeeJjOeahENFT++8jOmrmOWxgueuoeeQhue7j+eQhuS6uu+8jOS7peWPiuS4gOS6m+WbvemZheWTgeeJjOS6muWkquWMuuaIluS4reWbveWMuueahOS8geS4muWutuWSjOmrmOeuoeOAgeS4lueVjOefpeWQjeWSqOivouWFrOWPuOOAgeWkp+Wei+aKlei1hOWFrOWPuOeahOWQiOS8meS6uuOAgeW+i+W4iOWPiuiJuuacr+eVjOeahOefpeWQjeS6uuWjq+OAgeWTgeeJjOiuvuiuoeaAu+ebkeetieetieOAguS7luS7rOmDveWFt+acieWkmuW5tOWlouS+iOWTgSbpq5jnq6/lk4HniYznrqHnkIbmioDog73lkozlrp7miJjnu4/pqozjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabkuJrlrozmr5XlkI7lsIbojrflvpfku4DkuYjor4HkuaY/PC9zcGFuPjwvZHQ+PGRkPuazleWbveWbveWutuehleWjq+WtpuS9jeOAgeW3tOm7juS5neWkp+aOiOS6iOeahOmrmOe6p+WlouS+iOWTgeeuoeeQhuehleWjq+WtpuS9jeWSjOS4iua1t+S6pOmAmuWkp+WtpumigeWPkeeahOOAiuS4iua1t+S6pOmAmuWkp+WtpkVNQkzpq5jnuqflpaLkvojlk4HnrqHnkIbor77nqIvnu5PkuJror4HkuabjgIvvvIzlubbmnInmlZnmjojnrb7lkI3nmoTljZXpl6jor77nqIvlrabkuaDor4TkvLDljZXjgILor4HkuabmmK/lrabkuaDnu4/ljobnmoTor4HmmI7vvIzmr4/kuKrkurrnmoTogYzkuJrnlJ/mtq/kuK3vvIzpnIDopoHkuI3mlq3nmoTlrabkuaDlkozlhYXlrp7miY3og73ovr7liLDmm7Tpq5jnmoTkuovkuJrnm67moIfjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabotLnmmK/lpJrlsJHvvIzlpoLkvZXmlK/ku5jvvJ88L3NwYW4+PC9kdD48ZGQ+5a2m6LS55Li76KaB55Sx5Lq65rCR5biB5ou+5aO55LiH6IKG5Luf5YWD5pW077yIUk1CMTE077yMMDAwICnvvIjkuqTlpKfpg6jliIbvvInku6Xlj4rkurrmsJHluIHmi77lo7nkuIfogobku5/lhYPmlbQoUk1CMTE077yMMDAwKe+8iOS5neWkp+mDqOWIhu+8ieOAguesrOS4gOmDqOWIhueahOe8tOi0uemcgOimgeWcqOW8gOWtpuWJjeWujOaIkOOAguesrOS6jOmDqOWIhueahOe8tOi0ueWImemcgOimgeWcqOW8gOWtpuWQjjPkuKrmnIjkuYvlhoXlrozmiJDjgILms6jlhozotLk0NTDmrKcv5bm077yI4oKsNDUwL3llYXLvvIks5rW35aSW5pyN5Yqh6LS55aO55Luf5LyN5L2w5qyn77yI4oKsMTUwMO+8iTwvZGQ+PC9kbD48ZGw+PGR0PjxzcGFuPuWmguaenOaIkeWboOS4uuW3peS9nOWOn+WboO+8jOayoeacieWPguWKoOWFtuS4reeahOS4gOmXqOivvueoi++8jOS8muacieW9seWTjeWQl++8nzwvc3Bhbj48L2R0PjxkZD7pgJrluLjmg4XlhrXkuIvvvIzmlZnmjojkvJrmr4/kuKrmnIjlnKjkuIrmtbfpm4bkuK3mjojor74xLTLmrKHvvIzmr4/mrKHmjojor74z5aSp44CC5oiR5Lus6ZyA6KaB5oiR5Lus55qE5a2m55Sf6Iez5bCR5Ye65bit5LiN5bCR5LqOMuWkqeeahOivvueoi++8jOWmguaenOS9oOe8uuW4reS6huaJgOaciei2hei/hzHlpKnnmoTor77nqIvvvIzlsLHml6Dms5Xmi7/liLDmraTmrKHor77nqIvnmoTlrabliIbvvIzpnIDnrKzkuozlubTph43mlrDkv67or7vvvIzkvJrlr7zoh7TkvaDml6Dms5XmjInml7bmr5XkuJrjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lt7Tpu47kuZ3lpKflnKjms5Xlm73nmoTlpaLkvojlk4HnrqHnkIbor77nqIvmmK/mgI7moLfnmoTvvJ88L3NwYW4+PC9kdD48ZGQ+5Zyo5rOV5Zu977yM5be06buO5Lmd5aSn5Li65bm06L275a2m5ZGY5o+Q5L6bTE1FQeeahOivvueoi++8iEx1eHVyeSBNYW5hZ2VtZW50IGluIEV1cm9wZSBhbmQgQXNpYSDmrKfkuprlpaLkvojlk4HnrqHnkIbnoZXlo6vvvInvvIzkuLvopoHlrablkZjlubTpvoTlnKgyMuWIsDI15bKB44CCDQrlnKjkuK3lm73vvIznlLHkuo5FTUJM5piv6auY57qn57uP55CG5Lq65a2m5L2N6K++56iL77yM5omA5Lul5oiR5Lus55qE5a2m5ZGY5bm06b6E5Li76KaB5ZyoMzDliLA0NeWygeOAguiHs+WwkTXlubTku6XkuIrlt6XkvZznu4/pqozjgII8L2RkPjwvZGw+ZAILDxYCHwEFnwI8YSBpZD0nYV9GaXJzdCcgbGFuZz0nMCcgaHJlZj0nIyc+6aaW6aG1PC9hPjxhICBpZD0nYV9CYWNrJyBocmVmPScjJz7kuIrkuIDpobU8L2E+PGEgbGFuZz0nMCcgY2xhc3M9J2N1cicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjE8L2E+PGEgbGFuZz0nMScgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjI8L2E+PGEgbGFuZz0nMicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjM8L2E+PGEgbGFuZz0nMycgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjQ8L2E+PGEgaWQ9J2FfTmV4dCcgaHJlZj0nIyc+5LiL5LiA6aG1PC9hPmRko93Ho0xEvvUV3qrDifx/28QKyb4ITyu4Ma/Ilphes0k=&__VIEWSTATEGENERATOR=31BD29A7'" tppabs="http://embl.chinadauphine.cn/admissions/default.htm?__VIEWSTATE=/wEPDwULLTExNTU1NTY3NjUPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhui/m+S/rizlt7Tpu47kuZ3lpKcsRU1CTCxFTULln7norq1kAgIPFgIfAAVF5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbov5vkv67luLjop4Hpl67popjor6bmg4Xlm57nrZQuZAIDD2QWBgIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE3MTkxODUuanBnIiBhbHQ9J+aLm+eUn+eUs+ivtycgLz5kAgkPFgIfAQXoGzxkbD48ZHQ+PHNwYW4+5aaC5L2V5oql5ZCN77yfPC9zcGFuPjwvZHQ+PGRkPuaCqOWNs+WPr+mAmui/h+e9keermeWcqOe6v+ebtOaOpeaKpeWQje+8m+aIluWcqEVNQkznmoTlrpjnvZHkuIvovb3nlLPor7fooajvvIzloavlhpnlrozlkI7pgJrov4fku6XkuIvmlrnlvI/nm7TmjqXkuI7miJHku6zogZTns7vvvJoNCkZheO+8mjg2IDIxIDUyMzAgOTU5MA0K6IGU57O755S16K+d77yaODYgMjEgNjIxNSAxMDA5IOadjuiAgeW4iA0K6YKu5Lu25Zyw5Z2AOiBlbWJsQGNoaW5hZGF1cGhpbmUuY248L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7og73lkKbku4vnu43kuIvluIjotYTpmJ/kvI3nmoTog4zmma/vvJ88L3NwYW4+PC9kdD48ZGQ+5be06buO5Lmd5aSn55qE57K+6Iux5biI6LWE5Zui6Zif5Zyo5YW25LiT5Lia6aKG5Z+f6KKr5YWs6K6k5Li65LiW55WM5p2D5aiB5Lq65aOr44CC5LuW5Lus5r2c5b+D5pWZ5a2m5LiO56CU56m277yM5Zyo5pyA5paw55qE566h55CG5Y+R5bGV6LaL5Yq/5Lit5L+d5oyB6aG25bCW5a2m5pyv5rC05bmz44CCIA0K4peP6aG555uu6LSf6LSj5Lq6RGVuaXMgREFSUFnlnKjlpaLkvojlk4HnrqHnkIbmlZnlrabmlrnpnaLlhbfmnInmnYPlqIHmgKfjgIJEYXJweeaVmeaOiOaYr+azleWbveW3tOm7juS5neWkp+aVmeaOiO+8jOW4guWcuuiQpemUgOWtpuenkeW4puWktOS6uu+8jOabvuaLheS7u+W+rui9r+WFrOWPuOmhueebruS4u+euoe+8jExvdHVz56CU5Y+R5Zu96ZmF5Lqn5ZOB5Li7566h44CB5Lqn5ZOB6JCl6ZSA6LSf6LSj5Lq677yM5Lul5Y+K5rOV5Zu9VGVrdHJvbml45YWs5Y+45biC5Zy66JCl6ZSA6LSf6LSj5Lq6562J44CC5Li76KaB56CU56m26aKG5Z+f5pyJ77ya5aWi5L6I5ZOB5biC5Zy65a2m77yM5raI6LS56ICF6KGM5Li65a2m77yM5biC5Zy65oiY55Wl77yM5ZOB54mM5bu66K6+5LiO566h55CG44CCDQril4/mjojor77ogIHluIhHZXJhbGQgTWF6emFsb3Zv77yM5be06buO5Lmd5aSn5aWi5L6I5ZOB566h55CG6K6y5biI77yM5rOV5Zu96auY562J57uP5rWO5LiO5ZWG5Lia5a2m6Zmi77yIRVNTRUPvvInlpaLkvojlk4Hlk4HniYznrqHnkIZNQkHor77nqIvnmoTotJ/otKPkurrjgILmr5XkuJrkuo7ms5Xlm73pq5jnrYnljJblrablrabpmaLvvIzojrflvpfljJblrablt6XnqIvluIjlrabkvY3vvIzkuYvlkI7kuo7nvo7lm73lk6XkvKbmr5TkuprlpKflrabojrflvpdNQkHlrabkvY3vvIzmm77miafmlZnkuo7opb/nj63niZnpqazlvrfph4xFbXByZXNh5a2m6Zmi5ZKM5oSP5aSn5Yip57Gz5YWw5qyn5rSy6K6+6K6h5a2m6Zmi44CC5pu+5Lu76I+y5ouJ5qC85bmV77yIU2FsdmF0b3JlIEZlcnJhZ2Ftb++8iee6vee6pueahOexs+WFsOeahENFT++8jOilv+ePreeJmee9l+Woge+8iExvZXdl77yJ5LiO55Ge5aOr55m+5Li96ZuG5Zui77yIQmFsbHnvvInnmoTmgLvoo4HjgILkuLvopoHnoJTnqbbmlrnlkJHmnInvvJrlk4HniYznrqHnkIbvvIzkvIHkuJrmnoTlu7rvvIzmiJjnlaXlrprkuYnkuI7lupTnlKjjgIINCuivvueoi+WFtuS7lueahOaVmeaOiOWSjOW6p+WuouWYieWuvumDveadpeiHquS4lueVjOWlouS+iOWTgeWTgeeJjOeahENFT++8jOmrmOWxgueuoeeQhue7j+eQhuS6uu+8jOS7peWPiuS4gOS6m+WbvemZheWTgeeJjOS6muWkquWMuuaIluS4reWbveWMuueahOS8geS4muWutuWSjOmrmOeuoeOAgeS4lueVjOefpeWQjeWSqOivouWFrOWPuOOAgeWkp+Wei+aKlei1hOWFrOWPuOeahOWQiOS8meS6uuOAgeW+i+W4iOWPiuiJuuacr+eVjOeahOefpeWQjeS6uuWjq+OAgeWTgeeJjOiuvuiuoeaAu+ebkeetieetieOAguS7luS7rOmDveWFt+acieWkmuW5tOWlouS+iOWTgSbpq5jnq6/lk4HniYznrqHnkIbmioDog73lkozlrp7miJjnu4/pqozjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabkuJrlrozmr5XlkI7lsIbojrflvpfku4DkuYjor4HkuaY/PC9zcGFuPjwvZHQ+PGRkPuazleWbveWbveWutuehleWjq+WtpuS9jeOAgeW3tOm7juS5neWkp+aOiOS6iOeahOmrmOe6p+WlouS+iOWTgeeuoeeQhuehleWjq+WtpuS9jeWSjOS4iua1t+S6pOmAmuWkp+WtpumigeWPkeeahOOAiuS4iua1t+S6pOmAmuWkp+WtpkVNQkzpq5jnuqflpaLkvojlk4HnrqHnkIbor77nqIvnu5PkuJror4HkuabjgIvvvIzlubbmnInmlZnmjojnrb7lkI3nmoTljZXpl6jor77nqIvlrabkuaDor4TkvLDljZXjgILor4HkuabmmK/lrabkuaDnu4/ljobnmoTor4HmmI7vvIzmr4/kuKrkurrnmoTogYzkuJrnlJ/mtq/kuK3vvIzpnIDopoHkuI3mlq3nmoTlrabkuaDlkozlhYXlrp7miY3og73ovr7liLDmm7Tpq5jnmoTkuovkuJrnm67moIfjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabotLnmmK/lpJrlsJHvvIzlpoLkvZXmlK/ku5jvvJ88L3NwYW4+PC9kdD48ZGQ+5a2m6LS55Li76KaB55Sx5Lq65rCR5biB5ou+5aO55LiH6IKG5Luf5YWD5pW077yIUk1CMTE077yMMDAwICnvvIjkuqTlpKfpg6jliIbvvInku6Xlj4rkurrmsJHluIHmi77lo7nkuIfogobku5/lhYPmlbQoUk1CMTE077yMMDAwKe+8iOS5neWkp+mDqOWIhu+8ieOAguesrOS4gOmDqOWIhueahOe8tOi0uemcgOimgeWcqOW8gOWtpuWJjeWujOaIkOOAguesrOS6jOmDqOWIhueahOe8tOi0ueWImemcgOimgeWcqOW8gOWtpuWQjjPkuKrmnIjkuYvlhoXlrozmiJDjgILms6jlhozotLk0NTDmrKcv5bm077yI4oKsNDUwL3llYXLvvIks5rW35aSW5pyN5Yqh6LS55aO55Luf5LyN5L2w5qyn77yI4oKsMTUwMO+8iTwvZGQ+PC9kbD48ZGw+PGR0PjxzcGFuPuWmguaenOaIkeWboOS4uuW3peS9nOWOn+WboO+8jOayoeacieWPguWKoOWFtuS4reeahOS4gOmXqOivvueoi++8jOS8muacieW9seWTjeWQl++8nzwvc3Bhbj48L2R0PjxkZD7pgJrluLjmg4XlhrXkuIvvvIzmlZnmjojkvJrmr4/kuKrmnIjlnKjkuIrmtbfpm4bkuK3mjojor74xLTLmrKHvvIzmr4/mrKHmjojor74z5aSp44CC5oiR5Lus6ZyA6KaB5oiR5Lus55qE5a2m55Sf6Iez5bCR5Ye65bit5LiN5bCR5LqOMuWkqeeahOivvueoi++8jOWmguaenOS9oOe8uuW4reS6huaJgOaciei2hei/hzHlpKnnmoTor77nqIvvvIzlsLHml6Dms5Xmi7/liLDmraTmrKHor77nqIvnmoTlrabliIbvvIzpnIDnrKzkuozlubTph43mlrDkv67or7vvvIzkvJrlr7zoh7TkvaDml6Dms5XmjInml7bmr5XkuJrjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lt7Tpu47kuZ3lpKflnKjms5Xlm73nmoTlpaLkvojlk4HnrqHnkIbor77nqIvmmK/mgI7moLfnmoTvvJ88L3NwYW4+PC9kdD48ZGQ+5Zyo5rOV5Zu977yM5be06buO5Lmd5aSn5Li65bm06L275a2m5ZGY5o+Q5L6bTE1FQeeahOivvueoi++8iEx1eHVyeSBNYW5hZ2VtZW50IGluIEV1cm9wZSBhbmQgQXNpYSDmrKfkuprlpaLkvojlk4HnrqHnkIbnoZXlo6vvvInvvIzkuLvopoHlrablkZjlubTpvoTlnKgyMuWIsDI15bKB44CCDQrlnKjkuK3lm73vvIznlLHkuo5FTUJM5piv6auY57qn57uP55CG5Lq65a2m5L2N6K++56iL77yM5omA5Lul5oiR5Lus55qE5a2m5ZGY5bm06b6E5Li76KaB5ZyoMzDliLA0NeWygeOAguiHs+WwkTXlubTku6XkuIrlt6XkvZznu4/pqozjgII8L2RkPjwvZGw+ZAILDxYCHwEFnwI8YSBpZD0nYV9GaXJzdCcgbGFuZz0nMCcgaHJlZj0nIyc+6aaW6aG1PC9hPjxhICBpZD0nYV9CYWNrJyBocmVmPScjJz7kuIrkuIDpobU8L2E+PGEgbGFuZz0nMCcgY2xhc3M9J2N1cicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjE8L2E+PGEgbGFuZz0nMScgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjI8L2E+PGEgbGFuZz0nMicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjM8L2E+PGEgbGFuZz0nMycgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjQ8L2E+PGEgaWQ9J2FfTmV4dCcgaHJlZj0nIyc+5LiL5LiA6aG1PC9hPmRko93Ho0xEvvUV3qrDifx/28QKyb4ITyu4Ma/Ilphes0k=&__VIEWSTATEGENERATOR=31BD29A7" id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTExNTU1NTY3NjUPZBYEAgEPZBYEAgEPFgIeB2NvbnRlbnQFMeWlouS+iOWTgeeuoeeQhui/m+S/rizlt7Tpu47kuZ3lpKcsRU1CTCxFTULln7norq1kAgIPFgIfAAVF5be06buO5Lmd5aSnRU1CTOWfueiurSzlpaLkvojlk4HnrqHnkIbov5vkv67luLjop4Hpl67popjor6bmg4Xlm57nrZQuZAIDD2QWBgIDDxYCHglpbm5lcmh0bWwFRjxpbWcgc3JjPSIvVXBJbWFnZS9SZWxhdGUvMjAxNDA1MjcxNDE3MTkxODUuanBnIiBhbHQ9J+aLm+eUn+eUs+ivtycgLz5kAgkPFgIfAQXoGzxkbD48ZHQ+PHNwYW4+5aaC5L2V5oql5ZCN77yfPC9zcGFuPjwvZHQ+PGRkPuaCqOWNs+WPr+mAmui/h+e9keermeWcqOe6v+ebtOaOpeaKpeWQje+8m+aIluWcqEVNQkznmoTlrpjnvZHkuIvovb3nlLPor7fooajvvIzloavlhpnlrozlkI7pgJrov4fku6XkuIvmlrnlvI/nm7TmjqXkuI7miJHku6zogZTns7vvvJoNCkZheO+8mjg2IDIxIDUyMzAgOTU5MA0K6IGU57O755S16K+d77yaODYgMjEgNjIxNSAxMDA5IOadjuiAgeW4iA0K6YKu5Lu25Zyw5Z2AOiBlbWJsQGNoaW5hZGF1cGhpbmUuY248L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7og73lkKbku4vnu43kuIvluIjotYTpmJ/kvI3nmoTog4zmma/vvJ88L3NwYW4+PC9kdD48ZGQ+5be06buO5Lmd5aSn55qE57K+6Iux5biI6LWE5Zui6Zif5Zyo5YW25LiT5Lia6aKG5Z+f6KKr5YWs6K6k5Li65LiW55WM5p2D5aiB5Lq65aOr44CC5LuW5Lus5r2c5b+D5pWZ5a2m5LiO56CU56m277yM5Zyo5pyA5paw55qE566h55CG5Y+R5bGV6LaL5Yq/5Lit5L+d5oyB6aG25bCW5a2m5pyv5rC05bmz44CCIA0K4peP6aG555uu6LSf6LSj5Lq6RGVuaXMgREFSUFnlnKjlpaLkvojlk4HnrqHnkIbmlZnlrabmlrnpnaLlhbfmnInmnYPlqIHmgKfjgIJEYXJweeaVmeaOiOaYr+azleWbveW3tOm7juS5neWkp+aVmeaOiO+8jOW4guWcuuiQpemUgOWtpuenkeW4puWktOS6uu+8jOabvuaLheS7u+W+rui9r+WFrOWPuOmhueebruS4u+euoe+8jExvdHVz56CU5Y+R5Zu96ZmF5Lqn5ZOB5Li7566h44CB5Lqn5ZOB6JCl6ZSA6LSf6LSj5Lq677yM5Lul5Y+K5rOV5Zu9VGVrdHJvbml45YWs5Y+45biC5Zy66JCl6ZSA6LSf6LSj5Lq6562J44CC5Li76KaB56CU56m26aKG5Z+f5pyJ77ya5aWi5L6I5ZOB5biC5Zy65a2m77yM5raI6LS56ICF6KGM5Li65a2m77yM5biC5Zy65oiY55Wl77yM5ZOB54mM5bu66K6+5LiO566h55CG44CCDQril4/mjojor77ogIHluIhHZXJhbGQgTWF6emFsb3Zv77yM5be06buO5Lmd5aSn5aWi5L6I5ZOB566h55CG6K6y5biI77yM5rOV5Zu96auY562J57uP5rWO5LiO5ZWG5Lia5a2m6Zmi77yIRVNTRUPvvInlpaLkvojlk4Hlk4HniYznrqHnkIZNQkHor77nqIvnmoTotJ/otKPkurrjgILmr5XkuJrkuo7ms5Xlm73pq5jnrYnljJblrablrabpmaLvvIzojrflvpfljJblrablt6XnqIvluIjlrabkvY3vvIzkuYvlkI7kuo7nvo7lm73lk6XkvKbmr5TkuprlpKflrabojrflvpdNQkHlrabkvY3vvIzmm77miafmlZnkuo7opb/nj63niZnpqazlvrfph4xFbXByZXNh5a2m6Zmi5ZKM5oSP5aSn5Yip57Gz5YWw5qyn5rSy6K6+6K6h5a2m6Zmi44CC5pu+5Lu76I+y5ouJ5qC85bmV77yIU2FsdmF0b3JlIEZlcnJhZ2Ftb++8iee6vee6pueahOexs+WFsOeahENFT++8jOilv+ePreeJmee9l+Woge+8iExvZXdl77yJ5LiO55Ge5aOr55m+5Li96ZuG5Zui77yIQmFsbHnvvInnmoTmgLvoo4HjgILkuLvopoHnoJTnqbbmlrnlkJHmnInvvJrlk4HniYznrqHnkIbvvIzkvIHkuJrmnoTlu7rvvIzmiJjnlaXlrprkuYnkuI7lupTnlKjjgIINCuivvueoi+WFtuS7lueahOaVmeaOiOWSjOW6p+WuouWYieWuvumDveadpeiHquS4lueVjOWlouS+iOWTgeWTgeeJjOeahENFT++8jOmrmOWxgueuoeeQhue7j+eQhuS6uu+8jOS7peWPiuS4gOS6m+WbvemZheWTgeeJjOS6muWkquWMuuaIluS4reWbveWMuueahOS8geS4muWutuWSjOmrmOeuoeOAgeS4lueVjOefpeWQjeWSqOivouWFrOWPuOOAgeWkp+Wei+aKlei1hOWFrOWPuOeahOWQiOS8meS6uuOAgeW+i+W4iOWPiuiJuuacr+eVjOeahOefpeWQjeS6uuWjq+OAgeWTgeeJjOiuvuiuoeaAu+ebkeetieetieOAguS7luS7rOmDveWFt+acieWkmuW5tOWlouS+iOWTgSbpq5jnq6/lk4HniYznrqHnkIbmioDog73lkozlrp7miJjnu4/pqozjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabkuJrlrozmr5XlkI7lsIbojrflvpfku4DkuYjor4HkuaY/PC9zcGFuPjwvZHQ+PGRkPuazleWbveWbveWutuehleWjq+WtpuS9jeOAgeW3tOm7juS5neWkp+aOiOS6iOeahOmrmOe6p+WlouS+iOWTgeeuoeeQhuehleWjq+WtpuS9jeWSjOS4iua1t+S6pOmAmuWkp+WtpumigeWPkeeahOOAiuS4iua1t+S6pOmAmuWkp+WtpkVNQkzpq5jnuqflpaLkvojlk4HnrqHnkIbor77nqIvnu5PkuJror4HkuabjgIvvvIzlubbmnInmlZnmjojnrb7lkI3nmoTljZXpl6jor77nqIvlrabkuaDor4TkvLDljZXjgILor4HkuabmmK/lrabkuaDnu4/ljobnmoTor4HmmI7vvIzmr4/kuKrkurrnmoTogYzkuJrnlJ/mtq/kuK3vvIzpnIDopoHkuI3mlq3nmoTlrabkuaDlkozlhYXlrp7miY3og73ovr7liLDmm7Tpq5jnmoTkuovkuJrnm67moIfjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lrabotLnmmK/lpJrlsJHvvIzlpoLkvZXmlK/ku5jvvJ88L3NwYW4+PC9kdD48ZGQ+5a2m6LS55Li76KaB55Sx5Lq65rCR5biB5ou+5aO55LiH6IKG5Luf5YWD5pW077yIUk1CMTE077yMMDAwICnvvIjkuqTlpKfpg6jliIbvvInku6Xlj4rkurrmsJHluIHmi77lo7nkuIfogobku5/lhYPmlbQoUk1CMTE077yMMDAwKe+8iOS5neWkp+mDqOWIhu+8ieOAguesrOS4gOmDqOWIhueahOe8tOi0uemcgOimgeWcqOW8gOWtpuWJjeWujOaIkOOAguesrOS6jOmDqOWIhueahOe8tOi0ueWImemcgOimgeWcqOW8gOWtpuWQjjPkuKrmnIjkuYvlhoXlrozmiJDjgILms6jlhozotLk0NTDmrKcv5bm077yI4oKsNDUwL3llYXLvvIks5rW35aSW5pyN5Yqh6LS55aO55Luf5LyN5L2w5qyn77yI4oKsMTUwMO+8iTwvZGQ+PC9kbD48ZGw+PGR0PjxzcGFuPuWmguaenOaIkeWboOS4uuW3peS9nOWOn+WboO+8jOayoeacieWPguWKoOWFtuS4reeahOS4gOmXqOivvueoi++8jOS8muacieW9seWTjeWQl++8nzwvc3Bhbj48L2R0PjxkZD7pgJrluLjmg4XlhrXkuIvvvIzmlZnmjojkvJrmr4/kuKrmnIjlnKjkuIrmtbfpm4bkuK3mjojor74xLTLmrKHvvIzmr4/mrKHmjojor74z5aSp44CC5oiR5Lus6ZyA6KaB5oiR5Lus55qE5a2m55Sf6Iez5bCR5Ye65bit5LiN5bCR5LqOMuWkqeeahOivvueoi++8jOWmguaenOS9oOe8uuW4reS6huaJgOaciei2hei/hzHlpKnnmoTor77nqIvvvIzlsLHml6Dms5Xmi7/liLDmraTmrKHor77nqIvnmoTlrabliIbvvIzpnIDnrKzkuozlubTph43mlrDkv67or7vvvIzkvJrlr7zoh7TkvaDml6Dms5XmjInml7bmr5XkuJrjgII8L2RkPjwvZGw+PGRsPjxkdD48c3Bhbj7lt7Tpu47kuZ3lpKflnKjms5Xlm73nmoTlpaLkvojlk4HnrqHnkIbor77nqIvmmK/mgI7moLfnmoTvvJ88L3NwYW4+PC9kdD48ZGQ+5Zyo5rOV5Zu977yM5be06buO5Lmd5aSn5Li65bm06L275a2m5ZGY5o+Q5L6bTE1FQeeahOivvueoi++8iEx1eHVyeSBNYW5hZ2VtZW50IGluIEV1cm9wZSBhbmQgQXNpYSDmrKfkuprlpaLkvojlk4HnrqHnkIbnoZXlo6vvvInvvIzkuLvopoHlrablkZjlubTpvoTlnKgyMuWIsDI15bKB44CCDQrlnKjkuK3lm73vvIznlLHkuo5FTUJM5piv6auY57qn57uP55CG5Lq65a2m5L2N6K++56iL77yM5omA5Lul5oiR5Lus55qE5a2m5ZGY5bm06b6E5Li76KaB5ZyoMzDliLA0NeWygeOAguiHs+WwkTXlubTku6XkuIrlt6XkvZznu4/pqozjgII8L2RkPjwvZGw+ZAILDxYCHwEFnwI8YSBpZD0nYV9GaXJzdCcgbGFuZz0nMCcgaHJlZj0nIyc+6aaW6aG1PC9hPjxhICBpZD0nYV9CYWNrJyBocmVmPScjJz7kuIrkuIDpobU8L2E+PGEgbGFuZz0nMCcgY2xhc3M9J2N1cicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjE8L2E+PGEgbGFuZz0nMScgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjI8L2E+PGEgbGFuZz0nMicgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjM8L2E+PGEgbGFuZz0nMycgaHJlZj0nIycgbmFtZT0nYV9OdW0nPjQ8L2E+PGEgaWQ9J2FfTmV4dCcgaHJlZj0nIyc+5LiL5LiA6aG1PC9hPmRko93Ho0xEvvUV3qrDifx/28QKyb4ITyu4Ma/Ilphes0k=" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="31BD29A7" />
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".HeaderNav ul li").each(function (y) {
+            $(this).hover(function () {
+                $(".HeaderNav ul li").find("a").removeClass("cur");
+                $(".HeaderNav ul li").find("a").eq(y).addClass("cur");
+                $(".SubNav").hide();
+                $(".SubNav").eq(y).show();
+            }, function () {
+                $(".HeaderNav ul li").find("a").removeClass("cur");
+                //$(".HeaderNav ul li").find("a").eq(y).addClass("cur");
+                $(".SubNav").hide();
+            })
+        })
+    });
+    $(document).ready(function () {
+      
+        var url = window.location.href;
+        //alert(url);
+        if (url.indexOf("BaLi") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#jd").find("a").addClass("cur");
+        }
+        if (url.indexOf("project") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#xm").find("a").addClass("cur");
+        }
+        if (url.indexOf("admissions") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#admissions").find("a").addClass("cur");
+        }
+        if (url.indexOf("living") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#living").find("a").addClass("cur");
+        }
+        if (url.indexOf("partner") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#partner").find("a").addClass("cur");
+        }
+        if (url.indexOf("news") > 0) {
+            $(".HeaderNav ul li").find("a").removeClass("cur");
+            $("#news").find("a").addClass("cur");
+        }
+        if (url.indexOf("/") < 0) {
+            $("#sy").find("a").addClass("cur");
+        }
+        
+    });
+
+//    $(function () {
+//        $("#jd").click(function () {
+//            alert("1");
+//        });
+//    })
+
+</script>
+<div class="HeaderNav">
+    <div class="HeadCon">
+		<h1><a href="../index.htm" tppabs="http://embl.chinadauphine.cn/"><img src="../images/Logo.png" tppabs="http://embl.chinadauphine.cn/images/Logo.png" alt="" /></a></h1>
+		<ul>
+			<li id="sy"><a class="Title cur" href="../index.htm" tppabs="http://embl.chinadauphine.cn/">é¦–é¡µ</a>
+				<p class="SubNav"></p>
+			</li>
+			<li id="jd"><a class="Title" href="../BaLi/default.htm" tppabs="http://embl.chinadauphine.cn/BaLi/default.htm">å·´é»Žä¹å¤§</a>
+				<p class="SubNav">
+					<span><a href="../BaLi/default.htm" tppabs="http://embl.chinadauphine.cn/BaLi/default.htm">æ ¡é•¿è‡´è¾ž</a></span>
+					<span><a href="../BaLi/introduction.htm" tppabs="http://embl.chinadauphine.cn/BaLi/introduction.htm">å­¦æ ¡ç®€ä»‹</a></span>
+					<span><a href="../BaLi/certification.htm" tppabs="http://embl.chinadauphine.cn/BaLi/certification.htm">å›½é™…è®¤è¯</a></span>
+					<span><a href="../BaLi/research.htm" tppabs="http://embl.chinadauphine.cn/BaLi/research.htm">ç®¡ç†ç ”ç©¶</a></span>
+					<span><a href="../BaLi/contcat.htm" tppabs="http://embl.chinadauphine.cn/BaLi/contcat.htm">è”ç³»æˆ‘ä»¬</a></span>
+				</p>
+			</li>
+			<li id="xm"><a class="Title" href="../project/default.htm" tppabs="http://embl.chinadauphine.cn/project/default.htm">é¡¹ç›®ä»‹ç»</a>
+				<p class="SubNav">
+					<span><a href="../project/default.htm" tppabs="http://embl.chinadauphine.cn/project/default.htm">é¡¹ç›®ä»‹ç»</a></span>
+					<span><a href="../project/team.htm" tppabs="http://embl.chinadauphine.cn/project/team.htm">å¸ˆèµ„å›¢é˜Ÿ</a></span>
+				</p>
+			</li>
+			<li id="admissions"><a class="Title" href="process.htm" tppabs="http://embl.chinadauphine.cn/admissions/process.htm">æ‹›ç”Ÿç”³è¯·</a>
+				<p class="SubNav">
+					<span><a href="process.htm" tppabs="http://embl.chinadauphine.cn/admissions/process.htm">ç”³è¯·æµç¨‹</a></span>
+					<span><a href="default.htm" tppabs="http://embl.chinadauphine.cn/admissions/default.htm">å¸¸è§é—®é¢˜</a></span>
+					<span><a href="baoming.htm" tppabs="http://embl.chinadauphine.cn/admissions/baoming.htm">åœ¨çº¿æŠ¥å</a></span>
+				</p>
+			</li>
+			<li id="living"><a class="Title" href="../living/study.htm" tppabs="http://embl.chinadauphine.cn/living/study.htm">æ ¡å‹ç”Ÿæ´»</a>
+				<p class="SubNav">
+					<span><a href="../living/study.htm" tppabs="http://embl.chinadauphine.cn/living/study.htm">æ ¡å‹ç½‘ç»œ</a></span>
+					<span><a href="../living/default.htm" tppabs="http://embl.chinadauphine.cn/living/default.htm">å­¦ä¹ ä½“éªŒ</a></span>
+					<span><a href="../living/youxue.htm" tppabs="http://embl.chinadauphine.cn/living/youxue.htm">æµ·å¤–æ¸¸å­¦</a></span>
+				</p>
+			</li>
+			<li id="partner">
+				<a class="Title" href="../partner/default.htm" tppabs="http://embl.chinadauphine.cn/partner/default.htm">åˆä½œä¼™ä¼´</a>
+				<p class="SubNav">
+					<span><a href="../partner/default.htm" tppabs="http://embl.chinadauphine.cn/partner/default.htm">åˆä½œä¼™ä¼´</a></span>
+					<span><a href="../partner/support.htm" tppabs="http://embl.chinadauphine.cn/partner/support.htm">å“ç‰Œæ”¯æŒ</a></span>
+				</p>
+			</li>
+			<li id="news"><a class="Title" href="../news/default.htm" tppabs="http://embl.chinadauphine.cn/news/default.htm">æ–°é—»ä¸­å¿ƒ</a>
+				<p class="SubNav">
+					<span><a href="../news/default.htm" tppabs="http://embl.chinadauphine.cn/news/default.htm">æ–°é—»åŠ¨æ€</a></span>
+					<span><a href="../news/activity.htm" tppabs="http://embl.chinadauphine.cn/news/activity.htm">è¿‘æœŸæ´»åŠ¨</a></span>
+				</p>
+			</li>
+		</ul>
+		<img src="../images/HotLine.png" tppabs="http://embl.chinadauphine.cn/images/HotLine.png" alt="" class="TellImg" />
+    </div>
+</div>
+<div id="blbanner" class="SubBanner"><img src="../UpImage/Relate/20140527141719185.jpg" tppabs="http://embl.chinadauphine.cn/UpImage/Relate/20140527141719185.jpg" alt='æ‹›ç”Ÿç”³è¯·' /></div>
+<div class="SubMain clearfix">
+    <div class="AsideLeft">
+        
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+        if (url.indexOf("default") > 0) {
+            $("#default").addClass("cur");
+        }
+        if (url.indexOf("process") > 0) {
+            $("#process").addClass("cur");
+        }
+        if (url.indexOf("baoming") > 0) {
+            $("#baoming").addClass("cur");
+        }
+
+    });
+</script>
+
+<div class="AsideMenu">
+    <strong class="Tit">æ‹›ç”Ÿç”³è¯·</strong>
+    <ul>
+        <li id="process"><a href="process.htm" tppabs="http://embl.chinadauphine.cn/admissions/process.htm">ç”³è¯·æµç¨‹</a></li>
+        <li id="default"><a href="default.htm" tppabs="http://embl.chinadauphine.cn/admissions/default.htm">å¸¸è§é—®é¢˜</a></li>
+        <li id="baoming"><a href="baoming.htm" tppabs="http://embl.chinadauphine.cn/admissions/baoming.htm">åœ¨çº¿æŠ¥å</a></li>
+    </ul>
+</div>
+        
+<a href="" class="AsideAd1"><img src="../images/AdImg1.jpg" tppabs="http://embl.chinadauphine.cn/images/AdImg1.jpg" alt="2014å·´é»Žä¹å¤§EMBLé«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ç«çƒ­æ‹›ç”Ÿä¸­ç‚¹å‡»å’¨è¯¢æ‹›ç”Ÿçƒ­çº¿400-0730-027" /></a>
+    </div>
+    <div class="RightCont">
+        <p class="Position">
+            <a href="../index.htm" tppabs="http://embl.chinadauphine.cn/">é¦–é¡µ</a>
+            &gt;
+            <a href="index.htm" tppabs="http://embl.chinadauphine.cn/Admissions">æ‹›ç”Ÿç”³è¯·</a>
+            &gt;
+            <span>å¸¸è§é—®é¢˜</span>
+        </p>
+        <div id="ul_List" class="WTList clearfix"><dl><dt><span>å¦‚ä½•æŠ¥åï¼Ÿ</span></dt><dd>æ‚¨å³å¯é€šè¿‡ç½‘ç«™åœ¨çº¿ç›´æŽ¥æŠ¥åï¼›æˆ–åœ¨EMBLçš„å®˜ç½‘ä¸‹è½½ç”³è¯·è¡¨ï¼Œå¡«å†™å®ŒåŽé€šè¿‡ä»¥ä¸‹æ–¹å¼ç›´æŽ¥ä¸Žæˆ‘ä»¬è”ç³»ï¼š
+Faxï¼š86 21 5230 9590
+è”ç³»ç”µè¯ï¼š86 21 6215 1009 æŽè€å¸ˆ
+é‚®ä»¶åœ°å€: embl@chinadauphine.cn</dd></dl><dl><dt><span>èƒ½å¦ä»‹ç»ä¸‹å¸ˆèµ„é˜Ÿä¼çš„èƒŒæ™¯ï¼Ÿ</span></dt><dd>å·´é»Žä¹å¤§çš„ç²¾è‹±å¸ˆèµ„å›¢é˜Ÿåœ¨å…¶ä¸“ä¸šé¢†åŸŸè¢«å…¬è®¤ä¸ºä¸–ç•Œæƒå¨äººå£«ã€‚ä»–ä»¬æ½œå¿ƒæ•™å­¦ä¸Žç ”ç©¶ï¼Œåœ¨æœ€æ–°çš„ç®¡ç†å‘å±•è¶‹åŠ¿ä¸­ä¿æŒé¡¶å°–å­¦æœ¯æ°´å¹³ã€‚ 
+â—é¡¹ç›®è´Ÿè´£äººDenis DARPYåœ¨å¥¢ä¾ˆå“ç®¡ç†æ•™å­¦æ–¹é¢å…·æœ‰æƒå¨æ€§ã€‚Darpyæ•™æŽˆæ˜¯æ³•å›½å·´é»Žä¹å¤§æ•™æŽˆï¼Œå¸‚åœºè¥é”€å­¦ç§‘å¸¦å¤´äººï¼Œæ›¾æ‹…ä»»å¾®è½¯å…¬å¸é¡¹ç›®ä¸»ç®¡ï¼ŒLotusç ”å‘å›½é™…äº§å“ä¸»ç®¡ã€äº§å“è¥é”€è´Ÿè´£äººï¼Œä»¥åŠæ³•å›½Tektronixå…¬å¸å¸‚åœºè¥é”€è´Ÿè´£äººç­‰ã€‚ä¸»è¦ç ”ç©¶é¢†åŸŸæœ‰ï¼šå¥¢ä¾ˆå“å¸‚åœºå­¦ï¼Œæ¶ˆè´¹è€…è¡Œä¸ºå­¦ï¼Œå¸‚åœºæˆ˜ç•¥ï¼Œå“ç‰Œå»ºè®¾ä¸Žç®¡ç†ã€‚
+â—æŽˆè¯¾è€å¸ˆGerald Mazzalovoï¼Œå·´é»Žä¹å¤§å¥¢ä¾ˆå“ç®¡ç†è®²å¸ˆï¼Œæ³•å›½é«˜ç­‰ç»æµŽä¸Žå•†ä¸šå­¦é™¢ï¼ˆESSECï¼‰å¥¢ä¾ˆå“å“ç‰Œç®¡ç†MBAè¯¾ç¨‹çš„è´Ÿè´£äººã€‚æ¯•ä¸šäºŽæ³•å›½é«˜ç­‰åŒ–å­¦å­¦é™¢ï¼ŒèŽ·å¾—åŒ–å­¦å·¥ç¨‹å¸ˆå­¦ä½ï¼Œä¹‹åŽäºŽç¾Žå›½å“¥ä¼¦æ¯”äºšå¤§å­¦èŽ·å¾—MBAå­¦ä½ï¼Œæ›¾æ‰§æ•™äºŽè¥¿ç­ç‰™é©¬å¾·é‡ŒEmpresaå­¦é™¢å’Œæ„å¤§åˆ©ç±³å…°æ¬§æ´²è®¾è®¡å­¦é™¢ã€‚æ›¾ä»»è²æ‹‰æ ¼å¹•ï¼ˆSalvatore Ferragamoï¼‰çº½çº¦çš„ç±³å…°çš„CEOï¼Œè¥¿ç­ç‰™ç½—å¨ï¼ˆLoeweï¼‰ä¸Žç‘žå£«ç™¾ä¸½é›†å›¢ï¼ˆBallyï¼‰çš„æ€»è£ã€‚ä¸»è¦ç ”ç©¶æ–¹å‘æœ‰ï¼šå“ç‰Œç®¡ç†ï¼Œä¼ä¸šæž„å»ºï¼Œæˆ˜ç•¥å®šä¹‰ä¸Žåº”ç”¨ã€‚
+è¯¾ç¨‹å…¶ä»–çš„æ•™æŽˆå’Œåº§å®¢å˜‰å®¾éƒ½æ¥è‡ªä¸–ç•Œå¥¢ä¾ˆå“å“ç‰Œçš„CEOï¼Œé«˜å±‚ç®¡ç†ç»ç†äººï¼Œä»¥åŠä¸€äº›å›½é™…å“ç‰Œäºšå¤ªåŒºæˆ–ä¸­å›½åŒºçš„ä¼ä¸šå®¶å’Œé«˜ç®¡ã€ä¸–ç•ŒçŸ¥åå’¨è¯¢å…¬å¸ã€å¤§åž‹æŠ•èµ„å…¬å¸çš„åˆä¼™äººã€å¾‹å¸ˆåŠè‰ºæœ¯ç•Œçš„çŸ¥åäººå£«ã€å“ç‰Œè®¾è®¡æ€»ç›‘ç­‰ç­‰ã€‚ä»–ä»¬éƒ½å…·æœ‰å¤šå¹´å¥¢ä¾ˆå“&é«˜ç«¯å“ç‰Œç®¡ç†æŠ€èƒ½å’Œå®žæˆ˜ç»éªŒã€‚</dd></dl><dl><dt><span>å­¦ä¸šå®Œæ¯•åŽå°†èŽ·å¾—ä»€ä¹ˆè¯ä¹¦?</span></dt><dd>æ³•å›½å›½å®¶ç¡•å£«å­¦ä½ã€å·´é»Žä¹å¤§æŽˆäºˆçš„é«˜çº§å¥¢ä¾ˆå“ç®¡ç†ç¡•å£«å­¦ä½å’Œä¸Šæµ·äº¤é€šå¤§å­¦é¢å‘çš„ã€Šä¸Šæµ·äº¤é€šå¤§å­¦EMBLé«˜çº§å¥¢ä¾ˆå“ç®¡ç†è¯¾ç¨‹ç»“ä¸šè¯ä¹¦ã€‹ï¼Œå¹¶æœ‰æ•™æŽˆç­¾åçš„å•é—¨è¯¾ç¨‹å­¦ä¹ è¯„ä¼°å•ã€‚è¯ä¹¦æ˜¯å­¦ä¹ ç»åŽ†çš„è¯æ˜Žï¼Œæ¯ä¸ªäººçš„èŒä¸šç”Ÿæ¶¯ä¸­ï¼Œéœ€è¦ä¸æ–­çš„å­¦ä¹ å’Œå……å®žæ‰èƒ½è¾¾åˆ°æ›´é«˜çš„äº‹ä¸šç›®æ ‡ã€‚</dd></dl><dl><dt><span>å­¦è´¹æ˜¯å¤šå°‘ï¼Œå¦‚ä½•æ”¯ä»˜ï¼Ÿ</span></dt><dd>å­¦è´¹ä¸»è¦ç”±äººæ°‘å¸æ‹¾å£¹ä¸‡è‚†ä»Ÿå…ƒæ•´ï¼ˆRMB114ï¼Œ000 )ï¼ˆäº¤å¤§éƒ¨åˆ†ï¼‰ä»¥åŠäººæ°‘å¸æ‹¾å£¹ä¸‡è‚†ä»Ÿå…ƒæ•´(RMB114ï¼Œ000)ï¼ˆä¹å¤§éƒ¨åˆ†ï¼‰ã€‚ç¬¬ä¸€éƒ¨åˆ†çš„ç¼´è´¹éœ€è¦åœ¨å¼€å­¦å‰å®Œæˆã€‚ç¬¬äºŒéƒ¨åˆ†çš„ç¼´è´¹åˆ™éœ€è¦åœ¨å¼€å­¦åŽ3ä¸ªæœˆä¹‹å†…å®Œæˆã€‚æ³¨å†Œè´¹450æ¬§/å¹´ï¼ˆâ‚¬450/yearï¼‰,æµ·å¤–æœåŠ¡è´¹å£¹ä»Ÿä¼ä½°æ¬§ï¼ˆâ‚¬1500ï¼‰</dd></dl><dl><dt><span>å¦‚æžœæˆ‘å› ä¸ºå·¥ä½œåŽŸå› ï¼Œæ²¡æœ‰å‚åŠ å…¶ä¸­çš„ä¸€é—¨è¯¾ç¨‹ï¼Œä¼šæœ‰å½±å“å—ï¼Ÿ</span></dt><dd>é€šå¸¸æƒ…å†µä¸‹ï¼Œæ•™æŽˆä¼šæ¯ä¸ªæœˆåœ¨ä¸Šæµ·é›†ä¸­æŽˆè¯¾1-2æ¬¡ï¼Œæ¯æ¬¡æŽˆè¯¾3å¤©ã€‚æˆ‘ä»¬éœ€è¦æˆ‘ä»¬çš„å­¦ç”Ÿè‡³å°‘å‡ºå¸­ä¸å°‘äºŽ2å¤©çš„è¯¾ç¨‹ï¼Œå¦‚æžœä½ ç¼ºå¸­äº†æ‰€æœ‰è¶…è¿‡1å¤©çš„è¯¾ç¨‹ï¼Œå°±æ— æ³•æ‹¿åˆ°æ­¤æ¬¡è¯¾ç¨‹çš„å­¦åˆ†ï¼Œéœ€ç¬¬äºŒå¹´é‡æ–°ä¿®è¯»ï¼Œä¼šå¯¼è‡´ä½ æ— æ³•æŒ‰æ—¶æ¯•ä¸šã€‚</dd></dl><dl><dt><span>å·´é»Žä¹å¤§åœ¨æ³•å›½çš„å¥¢ä¾ˆå“ç®¡ç†è¯¾ç¨‹æ˜¯æ€Žæ ·çš„ï¼Ÿ</span></dt><dd>åœ¨æ³•å›½ï¼Œå·´é»Žä¹å¤§ä¸ºå¹´è½»å­¦å‘˜æä¾›LMEAçš„è¯¾ç¨‹ï¼ˆLuxury Management in Europe and Asia æ¬§äºšå¥¢ä¾ˆå“ç®¡ç†ç¡•å£«ï¼‰ï¼Œä¸»è¦å­¦å‘˜å¹´é¾„åœ¨22åˆ°25å²ã€‚
+åœ¨ä¸­å›½ï¼Œç”±äºŽEMBLæ˜¯é«˜çº§ç»ç†äººå­¦ä½è¯¾ç¨‹ï¼Œæ‰€ä»¥æˆ‘ä»¬çš„å­¦å‘˜å¹´é¾„ä¸»è¦åœ¨30åˆ°45å²ã€‚è‡³å°‘5å¹´ä»¥ä¸Šå·¥ä½œç»éªŒã€‚</dd></dl></div>
+        <div id="div_Page" class="PageNext"><a id='a_First' lang='0' href='#'>é¦–é¡µ</a><a  id='a_Back' href='#'>ä¸Šä¸€é¡µ</a><a lang='0' class='cur' href='#' name='a_Num'>1</a><a lang='1' href='#' name='a_Num'>2</a><a lang='2' href='#' name='a_Num'>3</a><a lang='3' href='#' name='a_Num'>4</a><a id='a_Next' href='#'>ä¸‹ä¸€é¡µ</a></div>
+    </div>
+</div>
+
+  <script type="text/javascript" src="../../lead.soperson.com/10033182/10038934.js" tppabs="http://lead.soperson.com/10033182/10038934.js"></script>
+<div class="Footer">
+    <p class="FLeft">ç‰ˆæƒæ‰€æœ‰ï¼šå·´é»Žä¹å¤§ä¸­å›½é¡¹ç›®åŠžå…¬å®¤   æ²ªICPå¤‡10206337    åœ°å€ï¼šä¸Šæµ·å¸‚å¾æ±‡åŒºå¹¿å…ƒè¥¿è·¯55å· æµ©ç„¶ç§‘æŠ€å¤§åŽ¦5æ¥¼</p>
+    <p class="FRight">ç”µè¯ï¼š400-0730-027    ä¼ çœŸï¼š021-5230 9590
+ï»¿<script>document.write(unescape('%3Cdiv%20style%3D%22display%3Anone%22%3E'));</script> <div class="parners"><li><a href="javascript:if(confirm('http://www.qhf.kr/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.kr/'" tppabs="http://www.qhf.kr/">www.qhf.kr</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.la/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.la/'" tppabs="http://www.qhf.la/">www.qhf.la</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.cz/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.cz/'" tppabs="http://www.qhf.cz/">www.qhf.cz</a> </li> <li><a href="javascript:if(confirm('http://www.qhf.pl/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qhf.pl/'" tppabs="http://www.qhf.pl/">www.qhf.pl</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.ca/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.ca/'" tppabs="http://www.qianhua.ca/">www.qianhua.ca</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.be/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.be/'" tppabs="http://www.qianhua.be/">www.qianhua.be</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.de/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.de/'" tppabs="http://www.qianhua.de/">www.qianhua.de</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.one/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.one/'" tppabs="http://www.qianhua.one/">www.qianhua.one</a> </li> <li><a href="javascript:if(confirm('http://www.qianhua.mobi/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.qianhua.mobi/'" tppabs="http://www.qianhua.mobi/">www.qianhua.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.aish.kr/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.kr/'" tppabs="http://www.aish.kr/">www.aish.kr</a> </li> <li><a href="javascript:if(confirm('http://www.aish.la/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.la/'" tppabs="http://www.aish.la/">www.aish.la</a> </li> <li><a href="javascript:if(confirm('http://www.aish.nl/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.nl/'" tppabs="http://www.aish.nl/">www.aish.nl</a> </li> <li><a href="javascript:if(confirm('http://www.aish.pl/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.pl/'" tppabs="http://www.aish.pl/">www.aish.pl</a> </li> <li><a href="javascript:if(confirm('http://www.aish.ch/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.ch/'" tppabs="http://www.aish.ch/">www.aish.ch</a> </li> <li><a href="javascript:if(confirm('http://www.aish.cz/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.cz/'" tppabs="http://www.aish.cz/">www.aish.cz</a> </li> <li><a href="javascript:if(confirm('http://www.aish.one/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.one/'" tppabs="http://www.aish.one/">www.aish.one</a> </li> <li><a href="javascript:if(confirm('http://www.aish.mobi/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.aish.mobi/'" tppabs="http://www.aish.mobi/">www.aish.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.kr/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.kr/'" tppabs="http://www.gzbb.kr/">www.gzbb.kr</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.la/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.la/'" tppabs="http://www.gzbb.la/">www.www.gzbb.la</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.me/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.me/'" tppabs="http://www.gzbb.me/">www.gzbb.me</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.ca/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.ca/'" tppabs="http://www.gzbb.ca/">www.gzbb.ca</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.be/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.be/'" tppabs="http://www.gzbb.be/">www.gzbb.be</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.ws/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.ws/'" tppabs="http://www.gzbb.ws/">www.gzbb.ws</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.tw/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.tw/'" tppabs="http://www.gzbb.tw/">www.gzbb.tw</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.one/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.one/'" tppabs="http://www.gzbb.one/">www.gzbb.one</a> </li> <li><a href="javascript:if(confirm('http://www.gzbb.mobi/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.gzbb.mobi/'" tppabs="http://www.gzbb.mobi/">www.gzbb.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.kr/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.kr/'" tppabs="http://www.sh419.kr/">www.sh419.kr</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.la/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.la/'" tppabs="http://www.sh419.la/">www.sh419.la</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.be/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.be/'" tppabs="http://www.sh419.be/">www.sh419.be</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.ca/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.ca/'" tppabs="http://www.sh419.ca/">www.sh419.ca</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.de/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.de/'" tppabs="http://www.sh419.de/">www.sh419.de</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.ws/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.ws/'" tppabs="http://www.sh419.ws/">www.sh419.ws</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.xyz/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.xyz/'" tppabs="http://www.sh419.xyz/">www.sh419.xyz</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.one/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.one/'" tppabs="http://www.sh419.one/">www.sh419.one</a> </li> <li><a href="javascript:if(confirm('http://www.sh419.mobi/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.sh419.mobi/'" tppabs="http://www.sh419.mobi/">www.sh419.mobi</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.kr/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.kr/'" tppabs="http://www.shlf.kr/">www.shlf.kr</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.be/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.be/'" tppabs="http://www.shlf.be/">www.shlf.be</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.tw/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.tw/'" tppabs="http://www.shlf.tw/">www.shlf.tw</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.pl/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.pl/'" tppabs="http://www.shlf.pl/">www.shlf.pl</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.ch/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.ch/'" tppabs="http://www.shlf.ch/">www.shlf.ch</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.cz/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.cz/'" tppabs="http://www.shlf.cz/">www.shlf.cz</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.nl/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.nl/'" tppabs="http://www.shlf.nl/">www.shlf.nl</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.one/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.one/'" tppabs="http://www.shlf.one/">www.shlf.one</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.biz/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.biz/'" tppabs="http://www.shlf.biz/">www.shlf.biz</a> </li> <li><a href="javascript:if(confirm('http://www.shlf.mobi/  \n\n¸ÃÎÄ¼þÎÞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·þÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.shlf.mobi/'" tppabs="http://www.shlf.mobi/">www.shlf.mobi</a></li> </div><script>document.write(unescape('%3C/div%3E'));</script> <script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '../../push.zhanzhang.baidu.com/push.js'/*tpa=http://push.zhanzhang.baidu.com/push.js*/;
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4510659a5871de3f85f56949b0d6a894' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000424731'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1000424731%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>--></p>
+  
+</div>
+</form>
+</body>
+</html>
